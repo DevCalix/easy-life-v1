@@ -1,0 +1,33 @@
+.custom-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+  }
+
+  .custom-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .custom-scroll::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+  }
+
+  .market-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .market-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .market-card img {
+    transition: transform 0.3s ease;
+  }
+
+  .market-card:hover img {
+    transform: scale(1.05);
+  }
+  #btnExplorer{
+    background-color: #4CAF50;
+  }

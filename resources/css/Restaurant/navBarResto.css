@@ -1,0 +1,54 @@
+/* Recherche.css */
+.search-container {
+    position: relative;
+  }
+
+  .search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .search-result-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .search-result-item:hover {
+    background: #f8f9fa;
+  }
+  
+/* Suggestions de recherche pour mobile */
+.search-results-mobile {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .search-results-mobile .search-result-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+  }
+
+  .search-results-mobile .search-result-item:hover {
+    background-color: #f9f9f9;
+  }

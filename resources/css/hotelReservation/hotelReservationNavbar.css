@@ -1,0 +1,31 @@
+.navbar {
+    background-color: #5e2595; /* Couleur principale du service */
+  }
+
+  .navbar a:not(.tel),
+  .navbar .navbar-brand {
+    color: #5e2595 !important;
+  }
+
+  .navbar a:hover {
+    color: #F9690E; /* Survol des liens */
+  }
+
+  .offcanvas-header {
+    background-color: #5e2595;
+    color: white;
+  }
+
+  .offcanvas-body {
+    background-color: #f9f9f9;
+  }
+
+  .offcanvas-body a {
+    font-size: 1.1rem;
+    color: #5e2595;
+    transition: color 0.3s ease;
+  }
+
+  .offcanvas-body a:hover {
+    color: #F9690E;
+  }

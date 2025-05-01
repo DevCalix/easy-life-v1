@@ -1,0 +1,23 @@
+/* Ajoutez ces styles à votre fichier CSS */
+.custom-arrow {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+.custom-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    opacity: 1; /* Assurez-vous que les flèches sont visibles */
+}

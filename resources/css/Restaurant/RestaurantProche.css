@@ -1,0 +1,44 @@
+/* Nearby Restaurants Section */
+.nearby-restaurants {
+    background-color: #f8f9fa;
+  }
+
+  .nearby-restaurants .card {
+    width: 250px;
+    transition: transform 0.3s ease;
+  }
+
+  .nearby-restaurants .card:hover {
+    transform: translateY(-10px);
+  }
+
+  .nearby-restaurants .restaurant-card {
+    flex-shrink: 0;
+  }
+
+  .nearby-restaurants .card-body {
+    padding: 20px;
+  }
+
+  .nearby-restaurants .card-title {
+    font-weight: bold;
+  }
+
+  .nearby-restaurants .card-text {
+    color: #6c757d;
+  }
+
+  .nearby-restaurants .badge {
+    font-size: 1rem;
+    padding: 5px 10px;
+  }
+
+  .nearby-restaurants button {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
+
+  .nearby-restaurants button:hover {
+    background-color: #0056b3;
+  }

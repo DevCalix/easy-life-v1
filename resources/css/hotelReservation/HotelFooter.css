@@ -1,0 +1,44 @@
+/* Pied de page principal avec fond blanc */
+.hotel-footer {
+    background-color: #ffffff;
+    color: #333333;
+  }
+
+  /* Titre des colonnes */
+  .footer-title {
+    font-weight: 700;
+    color: #5E2595; /* Couleur principale */
+    margin-bottom: 15px;
+  }
+
+  /* Texte de description */
+  .footer-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* Liens */
+  .footer-links .footer-link {
+    text-decoration: none;
+    color: #5E2595; /* Couleur principale */
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links .footer-link:hover {
+    color: #F9690E; /* Couleur pour l'effet de survol */
+  }
+
+  /* Section des droits réservés */
+  .footer-bottom {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  /* Icônes */
+  .footer-text i {
+    color: #5E2595; /* Couleur principale */
+  }

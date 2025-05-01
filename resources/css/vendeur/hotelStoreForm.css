@@ -1,0 +1,12 @@
+.bg-gradient-restaurant {
+    background: linear-gradient(135deg, #5F2698, #d62c2c);
+}
+.form-control, .form-select {
+    border: 1px solid #e0e0e0;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s;
+}
+.form-control:focus, .form-select:focus {
+    border-color: #d62c2c;
+    box-shadow: 0 0 0 0.25rem rgba(214, 44, 44, 0.25);
+}

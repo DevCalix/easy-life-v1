@@ -1,0 +1,50 @@
+/* RestoPopulaire.css */
+.popular-restaurants {
+  padding: 20px 0;
+}
+
+.restaurant-card {
+  flex: 0 0 auto; /* Empêche les cartes de s'étirer */
+  width: 180px; /* Largeur réduite des cartes */
+  margin-right: 10px; /* Espacement entre les cartes */
+}
+
+.restaurant-card .card {
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.restaurant-card .card:hover {
+  transform: scale(1.05); /* Effet de zoom au survol */
+}
+
+.restaurant-card .card-img-top {
+  height: 120px; /* Hauteur réduite de l'image */
+  object-fit: cover;
+}
+
+.restaurant-card .card-body {
+  padding: 10px;
+  text-align: center;
+}
+
+.restaurant-card .card-title {
+  font-size: 14px; /* Taille de police réduite */
+  margin-bottom: 5px;
+}
+
+.restaurant-card .text-muted {
+  font-size: 12px; /* Taille de police réduite */
+  margin-bottom: 5px;
+}
+
+.restaurant-card .badge {
+  font-size: 12px; /* Taille de police réduite */
+}
+
+.restaurant-card .btn {
+  font-size: 12px; /* Taille de police réduite */
+  padding: 5px 10px; /* Padding réduit */
+}

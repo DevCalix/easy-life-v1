@@ -1,0 +1,120 @@
+/* Section globale */
+.servicesSection {
+    background-color: #f9f9f9;
+  }
+
+  /* Titre de section */
+  .sectionTitle {
+    color: #4CAF50; /* Violet */
+    font-size: 0.85rem;
+    text-transform: uppercase;
+  }
+
+  /* Carte de service */
+  .serviceCard {
+    border: none;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  }
+
+  .serviceCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Conteneur d'icône */
+  .iconContainer {
+    width: 60px;
+    height: 60px;
+    background-color: #4fc3f7; /* Bleu clair */
+    color: #ffffff;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+  }
+
+  /* Texte de la carte */
+  .serviceTitle {
+    color: #4CAF50; /* Vert principal */
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  /* Bouton avec effet liquide */
+  .btnAction {
+    position: relative;
+    display: inline-block;
+    padding: 8px 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #ffffff;
+    background-color: #4caf50; /* Couleur principale */
+    border: none;
+    border-radius: 4px;
+
+    overflow: hidden;
+    z-index: 1;
+    transition: background-color 0.4s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .btnAction:hover {
+    transform: scale(1.05);
+  }
+
+  /* Pseudo-élément pour l'effet liquide */
+  .btnAction::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: rotate(45deg);
+    transition: all 0.4s ease-out;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .btnAction:hover::before {
+    left: 0;
+    transition: all 0.6s ease-out;
+  }
+
+  .btnAction span {
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .btnAction:hover span {
+    color: #e8f5e9; /* Couleur légèrement plus claire */
+  }
+
+  /* Layout: Trois éléments par ligne en version mobile */
+  @media (max-width: 992px) { /* Écran moyen */
+    .col-lg-4 {
+      flex: 0 0 33.3333%;
+      max-width: 33.3333%;
+    }
+  }
+
+  @media (max-width: 768px) { /* Tablette */
+    .col-md-6 {
+      flex: 0 0 33.3333%;
+      max-width: 33.3333%;
+    }
+  }
+
+  @media (max-width: 576px) { /* Mobile */
+    .col-4 {
+      flex: 0 0 33.3333%;
+      max-width: 33.3333%;
+    }
+  }

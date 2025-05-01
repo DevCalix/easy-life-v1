@@ -1,0 +1,24 @@
+.new-item-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .new-item-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  .btn-primary {
+    background-color: #ff5722;
+    border-color: #ff5722;
+  }
+  .btn-primary:hover {
+    background-color: #e64a19;
+    border-color: #e64a19;
+  }
+  .btn-outline-secondary {
+    color: #757575;
+    border-color: #757575;
+  }
+  .btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #757575;
+    border-color: #757575;
+  }

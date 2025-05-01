@@ -1,0 +1,51 @@
+.hero-container {
+    position: relative;
+    background: linear-gradient(135deg, #03c048, #016124);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .bird-container {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    z-index: 10;
+  }
+
+  #welcome-text {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .welcome-title {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .highlight {
+    color: #fbc02d; /* Couleur d'accentuation */
+  }
+
+  .welcome-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    color: #00796b;
+    background-color: #fbc02d;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .cta-button:hover {
+    background-color: #ffeb3b;
+  }

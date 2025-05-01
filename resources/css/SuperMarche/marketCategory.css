@@ -1,0 +1,55 @@
+/* Style des flèches */
+.custom-arrow {
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    background-color: #f9690e;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .custom-arrow:focus {
+    outline: none;
+  }
+
+  .custom-arrow:hover {
+    background-color: #d8570d;
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+}
+
+  /* Réduire l'effet d'ovalisation au focus */
+  .custom-arrow:focus-visible {
+    box-shadow: 0 0 0 4px rgba(249, 105, 14, 0.5);
+  }
+
+  /* Icônes des flèches */
+  .custom-arrow i {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  /* Réduire l'effet d’ombre */
+  .shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Ajouter un effet plus lisse pour mobile */
+  @media (max-width: 768px) {
+    .custom-arrow {
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+    }
+  }

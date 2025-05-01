@@ -1,0 +1,12 @@
+.map-hotels-section {
+    background-color: #f9f9f9;
+  }
+
+  .map-hotels-section h2 {
+    color: #5e2595;
+  }
+
+  #hotels-map {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ddd;
+  }

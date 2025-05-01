@@ -1,0 +1,145 @@
+/* PromotionDetails.css */
+
+/* Styles de base */
+.promotion-details-page {
+  background-color: #f8f9fa;
+  padding-bottom: 2rem;
+}
+
+/* Section de l'image principale */
+.promotion-hero {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.promotion-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.promotion-hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.promotion-name {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.promotion-location {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+/* Section des détails */
+.promotion-description {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+/* Styles pour les listes */
+.list-group-item {
+  font-size: 1rem;
+  padding: 10px 15px;
+  border: none;
+  border-bottom: 1px solid #eee;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
+
+/* Styles pour les cartes */
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Styles pour la galerie d'images */
+.gallery-section {
+  margin-top: 2rem;
+}
+
+.gallery-section h3 {
+  margin-bottom: 1rem;
+}
+
+.gallery-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.gallery-image:hover {
+  transform: scale(1.05);
+}
+
+/* Bouton de réservation */
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .promotion-hero {
+    height: 300px;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+  }
+
+  .gallery-image {
+    height: 120px;
+  }
+}
+
+@media (max-width: 576px) {
+  .promotion-hero {
+    height: 250px;
+  }
+
+  .card-text {
+    font-size: 0.8rem;
+  }
+
+  .gallery-image {
+    height: 100px;
+  }
+}

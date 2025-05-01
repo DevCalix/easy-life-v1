@@ -1,0 +1,101 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Empêche les débordements horizontaux */
+  }
+.hero-container {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.1), /* Vert transparent */
+        rgba(255, 255, 255, 0.1) /* Gris transparent */
+      ),
+      url('../../../public/images/MarketBan1.webp') no-repeat center center;
+    background-size: cover;
+    height: 25vh;
+    color: #fff;
+    font-family: "montserrat", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Conteneur de l'oiseau */
+  .bird-container {
+    width: 20vw;
+    height: 20vw;
+    max-width: 300px;
+    max-height: 300px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  /* Texte de bienvenue */
+  .welcome-text {
+    position: absolute;
+    text-align: center;
+    opacity: 0; /* Initialement caché */
+    z-index: 1;
+    transition: opacity 0.5s ease;
+  }
+
+  .welcome-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #1E88E5  ;
+  }
+
+  .highlight {
+    color: #4CAF50 ;
+  }
+
+  .welcome-subtitle {
+    font-size: 1rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: #000000 ;
+  }
+
+  /* Bouton CTA */
+  .cta-button {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #007bff;
+    background-color: #fff;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .cta-button:hover {
+    background-color: #4CAF50;
+    color: #000000;
+    transform: translateY(-3px);
+  }
+
+  /* Animation responsive */
+  @media (max-width: 600px) {
+    .bird-container {
+      width: 100vw;
+      height: 100vw;
+    }
+
+    .welcome-title {
+      font-size: 1rem;
+    }
+
+    .welcome-subtitle {
+      font-size: 1rem;
+    }
+
+    .cta-button {
+      font-size: 1rem;
+    }
+  }

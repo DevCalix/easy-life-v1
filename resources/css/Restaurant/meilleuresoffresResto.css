@@ -1,0 +1,38 @@
+/* Best Offers section */
+.best-offers .card {
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .best-offers .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .best-offers .card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .best-offers .badge {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+  }
+
+  .best-offers .card-body {
+    padding: 15px;
+    font-family: 'Montserrat';
+  }
+
+  .best-offers .card-title {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .best-offers .card-text {
+    font-size: 0.9rem;
+  }
+
+  .best-offers .d-flex span {
+    font-size: 1rem;
+  }

@@ -1,0 +1,17 @@
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #03BF49, #02722b);
+    }
+    .form-control {
+        border: 1px solid #e0e0e0;
+        padding: 0.5rem 1rem;
+        transition: all 0.3s;
+    }
+    .form-control:focus {
+        border-color: #4b6cb7;
+        box-shadow: 0 0 0 0.25rem rgba(75, 108, 183, 0.25);
+    }
+    .form-switch .form-check-input:checked {
+        background-color: #03BF49;
+        border-color: #05a740;
+    }
+

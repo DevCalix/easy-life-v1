@@ -1,0 +1,56 @@
+/* RepasPopulaires.css */
+.popular-dishes {
+    padding: 20px 0;
+  }
+
+  .dish-card {
+    flex: 0 0 auto; /* Empêche les cartes de s'étirer */
+    width: 160px; /* Largeur réduite des cartes */
+    margin-right: 10px; /* Espacement entre les cartes */
+  }
+
+  .dish-card .card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+  }
+
+  .dish-card .card:hover {
+    transform: scale(1.05); /* Effet de zoom au survol */
+  }
+
+  .dish-card .card-img-top {
+    height: 100px; /* Hauteur réduite de l'image */
+    object-fit: cover;
+  }
+
+  .dish-card .card-body {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .dish-card .card-title {
+    font-size: 14px; /* Taille de police réduite */
+    margin-bottom: 5px;
+  }
+
+  .dish-card .text-muted {
+    font-size: 12px; /* Taille de police réduite */
+    margin-bottom: 5px;
+  }
+
+  .dish-card .badge {
+    font-size: 12px; /* Taille de police réduite */
+  }
+
+  .dish-card .btn {
+    font-size: 12px; /* Taille de police réduite */
+    padding: 5px 10px; /* Padding réduit */
+  }
+
+  .restaurant-info {
+    font-size: 10px; /* Taille de police réduite pour les infos du restaurant */
+    color: #666;
+    margin-top: 5px;
+  }
