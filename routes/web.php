@@ -39,18 +39,6 @@ Route::get('/politique-de-confidentialite', function () {
     return Inertia::render('PrivacyPolicy');
 })->name('privacy-policy');
 
-Route::get('/storage-link', function () {
-    $targetFolder = storage_path('app/public');
-    $linkFolder = $_SERVER['DOCUMENT_ROOT'] . '/storage';
-
-    if (!file_exists($linkFolder)) {
-        symlink($targetFolder, $linkFolder);
-        return "Le lien symbolique a été créé avec succès.";
-    } else {
-        return "Le lien symbolique existe déjà.";
-    }
-});
-
 Route::prefix('adds')->group(function () {
     Route::resource('banners', PromoBannerController::class)->middleware(IsAdmin::class);
     Route::resource('banniere', PromoBanController::class)->middleware(IsAdmin::class);
