@@ -1,14 +1,12 @@
 import React from 'react';
 import { Head, Link, router, usePage } from '@inertiajs/react';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const PromotionIndex = () => {
     const { promotions, filters } = usePage().props;
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Liste des Promotions" />
+        <AdminLayout title="Liste des Promotions">
             <div className="container py-5">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="mb-4 montserrat-normal fw-bold text-primary">Liste des Promotions</h1>
@@ -132,7 +130,7 @@ const PromotionIndex = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

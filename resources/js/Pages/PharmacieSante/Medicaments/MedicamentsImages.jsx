@@ -2,10 +2,10 @@ import FileInput from "@/Components/FileInput";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
-import DashboardNavbar from "@/Layouts/Supermarche/admin/DashboardNavbar";
+import AdminLayout from "@/Layouts/Admin/AdminLayout";
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "@inertiajs/inertia-react";
-import { Head, router, usePage } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -87,9 +87,8 @@ const MedicamentsImages = ({ medicament }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Gestion des Images" />
+        <AdminLayout title="Gestion des Images">
+
             <div className="container py-5">
                 <div className="d-flex justify-content-between align-items-center">
                     <h1 className="mb-4 montserrat-normal fw-bold">Gestion des Images</h1>
@@ -200,7 +199,7 @@ const MedicamentsImages = ({ medicament }) => {
                 draggable
                 pauseOnHover
             />
-        </>
+        </AdminLayout>
     );
 };
 

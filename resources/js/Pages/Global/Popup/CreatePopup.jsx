@@ -7,9 +7,9 @@ import Textarea from '@/Components/Textarea';
 import SelectInput from '@/Components/SelectInput';
 import FileInput from '@/Components/FileInput';
 import PrimaryButton from '@/Components/PrimaryButton';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const CreatePopup = () => {
     const { data, setData, post, processing, errors } = useForm({
@@ -50,13 +50,12 @@ const CreatePopup = () => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Créer un Popup" />
-            <div className="container py-5">
+        <AdminLayout title="Créer un Popup">
+
+            <div className="container py-2">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="mb-4 montserrat-normal fw-bold text-primary">Créer un Popup</h1>
-                    <Link href="/admin/popups" className="btn btn-primary montserrat-normal">
+                    <Link href="/adds/popups" className="btn btn-primary montserrat-normal">
                         Retour
                     </Link>
                 </div>
@@ -167,7 +166,7 @@ const CreatePopup = () => {
                     </div>
                 </form>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

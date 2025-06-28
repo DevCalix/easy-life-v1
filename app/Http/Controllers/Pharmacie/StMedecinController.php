@@ -27,6 +27,15 @@ class StMedecinController extends Controller
      */
     public function create()
     {
+        $userId = Auth::id();
+
+        // Vérifier si le médecin existe déjà pour l'utilisateur connecté
+        $medecinExiste = StMedecin::where('user_id', $userId)->exists();
+
+        if ($medecinExiste) {
+            // Rediriger ou retourner une erreur / message d'alerte
+            return redirect()->route('profile.stUser')->with('error', 'Vous êtes déjà inscrit comme médecin.');
+        }
         return Inertia::render('PharmacieSante/Medecin/MedecinCreate');
     }
 
@@ -46,8 +55,9 @@ class StMedecinController extends Controller
 
         if ($medecin) {
             // Redirection vers la page d'édition du spécialiste de santé
-            return redirect()->route('specialiste-de-sante.edit', ['specialiste_de_sante' => $medecin->id])
-                             ->with('success', 'Médecin ajouté avec succès.');
+            return redirect()->route('profile.stUser')
+                             ->with('success', 'Bienvenue dans la communauté des médecins engagés !
+                                Votre expertise fait la différence, et nous sommes fiers de vous accueillir. Ensemble, aidons encore plus de patients à mieux vivre.');
         }
 
         return redirect()->back()->with('error', 'Erreur lors de l\'ajout du médecin.');

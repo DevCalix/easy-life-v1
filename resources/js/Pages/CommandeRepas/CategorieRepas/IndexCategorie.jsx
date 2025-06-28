@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { Head, Link, usePage } from '@inertiajs/react'; // Importez usePage depuis @inertiajs/react
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
-import PiedDePageResto from '@/Layouts/Restaurant/global/PiedDePageResto';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const IndexCategorie = ({ categories }) => {
     const { flash } = usePage().props; // Accéder aux messages flash
@@ -25,11 +24,11 @@ const IndexCategorie = ({ categories }) => {
     }, [flash.success, flash.error]);
 
     return (
-        <>
-            <Head title="Liste des Catégories" />
-            <DashboardNavbar/>
-            <div className="container py-5">
-                <h1 className="mb-4">Liste des Catégories</h1>
+        <AdminLayout title="Liste des Catégories" >
+            
+            <div className="container py-1">
+                <h1 className="mb-4 montserrat-normal fw-bold">Liste des Catégories</h1>
+                <hr className="border-2 border-warning opacity-75" />
                 <Link href={route('categorie-repas.create')} className="btn btn-primary mb-3">
                     Ajouter une Catégorie
                 </Link>
@@ -66,7 +65,6 @@ const IndexCategorie = ({ categories }) => {
                     </table>
                 </div>
             </div>
-            <PiedDePageResto/>
             {/* Ajoutez ToastContainer ici */}
             <ToastContainer
                 position="bottom-right"
@@ -79,7 +77,7 @@ const IndexCategorie = ({ categories }) => {
                 draggable
                 pauseOnHover
             />
-        </>
+        </AdminLayout>
     );
 };
 

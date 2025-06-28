@@ -8,16 +8,17 @@ import Navbar from '@/Layouts/Accueil/Navbar';
 import PodcastSection from '@/Layouts/Accueil/PodcastSection';
 import ServicesSection from '@/Layouts/Accueil/Services';
 import TestimonialsSection from '@/Layouts/Accueil/TestimonialsSection';
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import PromoBan from '@/Layouts/Accueil/PromoBan';
+import HomeSections from '@/Layouts/Accueil/HomeSections';
+import TopVendeurSection from '@/Layouts/Accueil/TopVendeurSection';
 
-export default function Welcome({ banners = [], ligne1 = [], ligne2 = [], ligne3 = [], gauche = [], droite = [] }) {
-
-
+export default function Welcome({ banners = [], ligne1 = [], ligne2 = [], ligne3 = [], gauche = [], droite = [], sections = [],topVendeurs = [], submenus = [] }) {
+    
     return (
         <>
             <Head title="Accueil" />
-            <Navbar/>
+            <Navbar submenus={submenus}/>
             <PromoBan
                 ligne1={ligne1}
                 ligne2={ligne2}
@@ -30,11 +31,9 @@ export default function Welcome({ banners = [], ligne1 = [], ligne2 = [], ligne3
             <PodcastSection/>
             <ServicesSection/>
             <DevenirVendeur/>
-            <div className='container-fluid'>
-                <MobileAppSection/>
-                <TestimonialsSection/>
-                <Faqs/>
-            </div>
+            <TopVendeurSection topVendeurs={topVendeurs} />
+            <HomeSections sections={sections} />
+
             <Footer/>
         </>
     );

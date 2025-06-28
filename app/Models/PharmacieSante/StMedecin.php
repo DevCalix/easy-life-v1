@@ -18,6 +18,9 @@ class StMedecin extends Model
         'carte',
         'image_principale',
         'note',
+        'type',
+        'nombre_d_annee_experience',
+        'a_propos',
     ];
 
     // Relation belongsTo avec User

@@ -2,6 +2,7 @@ import PromoBan from "@/Layouts/Accueil/PromoBan";
 import CategoriesCarousel from "@/Layouts/PharmacieSante/CategoriesCarousel";
 import InscriptionDocteurSection from "@/Layouts/PharmacieSante/InscriptionDocteurSection";
 import MedicamentsUrgents from "@/Layouts/PharmacieSante/MedicamentsUrgents";
+import PharmaBan from "@/Layouts/PharmacieSante/PharmaBan";
 // import PharmaBan from "@/Layouts/PharmacieSante/PharmaBan";
 import PharmacieDeGarde from "@/Layouts/PharmacieSante/PharmacieDeGarde";
 import PharmacieFooter from "@/Layouts/PharmacieSante/PharmacieFooter";
@@ -13,7 +14,7 @@ export default function PharmacieAccueil({pharmacieDeGarde =[],medicamentsUrgent
     return(
         <>
             <PharmaNavbar/>
-            {/* <PharmaBan/> */}
+            <PharmaBan/>
             <PromoBan
                 ligne1={ligne1}
                 ligne2={ligne2}
@@ -26,6 +27,9 @@ export default function PharmacieAccueil({pharmacieDeGarde =[],medicamentsUrgent
             {/* <PrendreRendezVous medecins={medecins}/> */}
             <PharmacieDeGarde pharmacieDeGarde = {pharmacieDeGarde}/>
             <PharmaciesProches pharmacies = {pharmacies}/>
+            <PrendreRendezVous medecins={medecins}/>
+
+            {/* Section pour l'inscription des docteurs */}
             <InscriptionDocteurSection/>
 
             <PharmacieFooter/>

@@ -15,7 +15,7 @@ class SpCategorieController extends Controller
      */
     public function index()
     {
-        $categories = auth()->user()->categories()->get(); 
+        $categories = auth()->user()->categories()->get();
         return response()->json($categories);
     }
 
@@ -25,7 +25,7 @@ class SpCategorieController extends Controller
     public function create()
     {
         // Récupérer toutes les catégories
-        $categories = auth()->user()->categories()->get(); 
+        $categories = auth()->user()->categories()->get();
         return Inertia::render('Managers/Supermarche/Categories/CategoriesCreate',[
             'categories' => $categories,
             'success' => session('success'),
@@ -44,7 +44,7 @@ class SpCategorieController extends Controller
             'nom' => 'required|string|max:255|unique:categories,nom',
             'description' => 'nullable|string|max:500',
         ]);
-
+        dd($validated);
         // Création de la catégorie (le slug est généré automatiquement par le modèle)
         $category = Categorie::create([
             'nom' => $validated['nom'],

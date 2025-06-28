@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Head } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
-import DashboardNavbar from "@/Layouts/Supermarche/admin/DashboardNavbar";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AdminLayout from "@/Layouts/Admin/AdminLayout";
 
 const ReservationsIndex = ({ reservations, flash }) => {
   const [reservationList, setReservationList] = useState(reservations);
@@ -63,10 +62,9 @@ const ReservationsIndex = ({ reservations, flash }) => {
   });
 
   return (
-    <>
-      <Head title="Liste des Réservations" />
-      <DashboardNavbar />
-      <div className="container py-5">
+    <AdminLayout title="Liste des Réservations">
+
+      <div className="container py-1">
         <h1 className="text-center mb-2 montserrat-normal fw-bold">
           Liste des Réservations
         </h1>
@@ -155,7 +153,7 @@ const ReservationsIndex = ({ reservations, flash }) => {
         </div>
       </div>
       <ToastContainer position="bottom-right" autoClose={3000} />
-    </>
+    </AdminLayout>
   );
 };
 

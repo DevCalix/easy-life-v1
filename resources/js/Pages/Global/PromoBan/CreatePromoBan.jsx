@@ -6,7 +6,7 @@ import InputError from '@/Components/InputError';
 import FileInput from '@/Components/FileInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Checkbox from '@/Components/Checkbox';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const CreatePromoBan = () => {
     const { data, setData, post, processing, errors } = useForm({
@@ -22,6 +22,30 @@ const CreatePromoBan = () => {
         { label: 'Carousel ligne 3', value: 'ligne_3' },
         { label: 'Gauche', value: 'gauche' },
         { label: 'Droite', value: 'droite' },
+        
+        { label: 'Market Carousel ligne 1', value: 'sp_ligne_1' },
+        { label: 'Market Carousel ligne 2', value: 'sp_ligne_2' },
+        { label: 'Market Carousel ligne 3', value: 'sp_ligne_3' },
+        { label: 'Market Gauche', value: 'sp_gauche' },
+        { label: 'Market Droite', value: 'sp_droite' },
+
+        { label: 'Resto Carousel ligne 1', value: 'resto_ligne_1' },
+        { label: 'Resto Carousel ligne 2', value: 'resto_ligne_2' },
+        { label: 'Resto Carousel ligne 3', value: 'resto_ligne_3' },
+        { label: 'Resto Gauche', value: 'resto_gauche' },
+        { label: 'Resto Droite', value: 'resto_droite' },
+
+        { label: 'Pharmacie  Carousel ligne 1', value: 'st_ligne_1' },
+        { label: 'Pharmacie Carousel ligne 2', value: 'st_ligne_2' },
+        { label: 'Pharmacie Carousel ligne 3', value: 'st_ligne_3' },
+        { label: 'Pharmacie Gauche', value: 'st_gauche' },
+        { label: 'Pharmacie Droite', value: 'st_droite' },
+
+        { label: 'Hotel  Carousel ligne 1', value: 'ht_ligne_1' },
+        { label: 'Hotel Carousel ligne 2', value: 'ht_ligne_2' },
+        { label: 'Hotel Carousel ligne 3', value: 'ht_ligne_3' },
+        { label: 'Hotel Gauche', value: 'ht_gauche' },
+        { label: 'Hotel Droite', value: 'ht_droite' },
     ];
 
     const [imagePreview, setImagePreview] = useState(null);
@@ -49,10 +73,9 @@ const CreatePromoBan = () => {
     };
 
     return (
-        <>
-            <Head title="Ajouter une Bannière Promotionnelle" />
-            <DashboardNavbar />
-            <div className="container">
+        <AdminLayout title="Ajouter une Bannière Promotionnelle">
+
+            <div className="container-fluid">
                 <h1 className="mb-4 h6 fw-bold">Ajouter une Bannière Promotionnelle</h1>
                 <hr className="border-warning border-3 opacity-75" />
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -133,7 +156,7 @@ const CreatePromoBan = () => {
                     </div>
                 </form>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

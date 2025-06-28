@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import PiedDePageResto from '@/Layouts/Restaurant/global/PiedDePageResto';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const IndexRepas = () => {
     const { repas, flash } = usePage().props; // Récupérer les repas depuis les props
@@ -68,15 +67,15 @@ const IndexRepas = () => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <div className="container py-5">
+        <AdminLayout title="Liste des Repas" >
+            <div className="container py-2">
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                    <h1>Liste des Repas</h1>
+                    <h1 className="montserrat-normal fw-bold">Liste des Repas</h1>
                     <Link href="/commande-repas/repas/create" className="btn btn-primary">
                         Ajouter un Repas
                     </Link>
                 </div>
+                <hr className="montserrat-normal fw-bold "/>
 
                 {/* Formulaire de filtrage */}
                 <div className="mb-4">
@@ -169,7 +168,6 @@ const IndexRepas = () => {
                     </table>
                 </div>
             </div>
-            <PiedDePageResto/>
             <ToastContainer
                 position="bottom-right"
                 autoClose={3000}
@@ -181,7 +179,7 @@ const IndexRepas = () => {
                 draggable
                 pauseOnHover
             />
-        </>
+        </AdminLayout>
     );
 };
 

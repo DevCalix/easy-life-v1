@@ -5,7 +5,7 @@ import InputLabel from '@/Components/InputLabel';
 import InputError from '@/Components/InputError';
 import FileInput from '@/Components/FileInput';
 import PrimaryButton from '@/Components/PrimaryButton';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const HopitalCreate = () => {
     const { data, setData, post, processing, errors } = useForm({
@@ -44,10 +44,8 @@ const HopitalCreate = () => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Ajouter un hopital" />
-            <div className="container py-5">
+        <AdminLayout title="Ajouter un hopital">
+            <div className="container py-2">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="mb-4 montserrat-normal fw-bold">Ajouter un hopital</h1>
                     <Link href={route('hopitaux.index')} className="btn btn-primary montserrat-normal">
@@ -157,7 +155,7 @@ const HopitalCreate = () => {
                     </div>
                 </form>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

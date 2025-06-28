@@ -69,8 +69,8 @@ export default function PromoBan({ ligne1 = [], ligne2 = [], ligne3 = [], gauche
               </button>
             </div>
           ) : (
-            <div className="text-center py-4 bg-light rounded">
-              <p>Aucune bannière disponible pour cette section</p>
+            <div className="text-center py-2 bg-light rounded">
+              <p></p>
             </div>
           )}
         </div>

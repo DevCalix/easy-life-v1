@@ -34,11 +34,11 @@ class GlobalRestaurantController extends Controller
         ->limit(20) // Limite à 20 repas
         ->get();
 
-        $ligne1 = PromoBan::where("statut", 1)->where("emplacement", "ligne_1")->get();
-        $ligne2 = PromoBan::where("statut", 1)->where("emplacement", "ligne_2")->get();
-        $ligne3 = PromoBan::where("statut", 1)->where("emplacement", "ligne_3")->get();
-        $gauche = PromoBan::where("statut", 1)->where("emplacement", "gauche")->get();
-        $droite = PromoBan::where("statut", 1)->where("emplacement", "droite")->get();
+        $ligne1 = PromoBan::where("statut", 1)->where("emplacement", "resto_ligne_1")->get();
+        $ligne2 = PromoBan::where("statut", 1)->where("emplacement", "resto_ligne_2")->get();
+        $ligne3 = PromoBan::where("statut", 1)->where("emplacement", "resto_ligne_3")->get();
+        $gauche = PromoBan::where("statut", 1)->where("emplacement", "resto_gauche")->get();
+        $droite = PromoBan::where("statut", 1)->where("emplacement", "resto_droite")->get();
 
         return Inertia::render('CommandeRepas/AccueilResto', [
             'categories' => $categories,

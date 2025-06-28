@@ -5,8 +5,8 @@ import InputLabel from '@/Components/InputLabel';
 import InputError from '@/Components/InputError';
 import SelectInput from '@/Components/SelectInput';
 import PrimaryButton from '@/Components/PrimaryButton';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import Textarea from '@/Components/Textarea';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const PromotionForm = ({ hotels, chambres, promotion = null }) => {
     const { data, setData, post, put, processing, errors } = useForm({
@@ -47,9 +47,7 @@ const PromotionForm = ({ hotels, chambres, promotion = null }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title={promotion ? "Modifier une Promotion" : "Ajouter une Promotion"} />
+        <AdminLayout title={promotion ? "Modifier une Promotion" : "Ajouter une Promotion"}>
             <div className="container py-5">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="mb-4 montserrat-normal fw-bold text-primary">
@@ -173,7 +171,7 @@ const PromotionForm = ({ hotels, chambres, promotion = null }) => {
                     </div>
                 </form>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

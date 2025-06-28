@@ -50,14 +50,7 @@ const PharmaBan = () => {
 
       {/* Texte de bienvenue */}
       <div id="welcome-text" className="welcome-text mx-2">
-        <h1 className="welcome-title fw-bold">
-          Prenez soin de votre santé avec{" "}
-          <span className="highlight">Easy Life</span>.
-        </h1>
-        <p className="welcome-subtitle p-2">
-          Commandez vos médicaments, produits de soin et accessoires en toute simplicité. Livraison rapide et sécurisée.
-        </p>
-        <hr/>
+        
         {/* Section des boutons d'action */}
         <div className="action-buttons d-flex flex-column flex-md-row justify-content-center gap-3">
         {/* Bouton pour les urgences de santé */}

@@ -2,6 +2,7 @@ import FileInput from "@/Components/FileInput";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
+import AdminLayout from "@/Layouts/Admin/AdminLayout";
 import DashboardNavbar from "@/Layouts/Supermarche/admin/DashboardNavbar";
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "@inertiajs/inertia-react";
@@ -87,10 +88,9 @@ const PharmacieImages = ({ pharmacie }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Gestion des Images de la Pharmacie" />
-            <div className="container py-5">
+        <AdminLayout title="Gestion des Images de la Pharmacie">
+
+            <div className="container py-2">
                 <div className="d-flex justify-content-between align-items-center">
                     <h1 className="mb-4 montserrat-normal fw-bold">Gestion des Images de la Pharmacie</h1>
                     <button
@@ -200,7 +200,7 @@ const PharmacieImages = ({ pharmacie }) => {
                 draggable
                 pauseOnHover
             />
-        </>
+        </AdminLayout>
     );
 };
 

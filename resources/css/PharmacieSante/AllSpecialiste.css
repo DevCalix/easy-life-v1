@@ -1,0 +1,32 @@
+/* Colonnes personnalisées pour 5 éléments par ligne */
+.col-lg-2-4 {
+    flex: 0 0 auto;
+    width: 20%;
+}
+
+@media (max-width: 992px) {
+    .col-lg-2-4 {
+        width: 33.333333%;
+    }
+}
+
+@media (max-width: 768px) {
+    .col-lg-2-4 {
+        width: 50%;
+    }
+}
+
+/* Style pour les modals */
+.modal-body img {
+    max-width: 100%;
+}
+
+/* Amélioration de l'affichage des cartes */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}

@@ -10,8 +10,8 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import axios from 'axios';
 import SelectInputTom from '@/Components/SelectInputTom';
 import Checkbox from '@/Components/Checkbox';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import PiedDePageResto from '@/Layouts/Restaurant/global/PiedDePageResto';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const CreateRepas = ({ categories, restaurants, tags: initialTags }) => {
     // Gestion du formulaire avec useForm
@@ -118,11 +118,12 @@ const CreateRepas = ({ categories, restaurants, tags: initialTags }) => {
     };
 
     return (
-        <>
-            <Head title="Ajouter un Repas" />
-            <DashboardNavbar/>
-            <div className="container py-5">
-                <h1 className="mb-4">Ajouter un Repas</h1>
+        <AdminLayout title="Ajouter un Repas">
+            
+            {/* <DashboardNavbar/> */}
+            <div className="container py-2">
+                <h1 className="mb-4 montserrat-normal fw-bold">Ajouter un Repas</h1>
+                <hr className="border-2 border-warning opacity-75"/>
                 <form onSubmit={handleSubmit}>
                     {/* Sélection du restaurant */}
                     <div className="mb-3">
@@ -326,7 +327,7 @@ const CreateRepas = ({ categories, restaurants, tags: initialTags }) => {
                 </form>
             </div>
             <PiedDePageResto/>
-        </>
+        </AdminLayout>
     );
 };
 

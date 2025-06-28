@@ -4,6 +4,7 @@ import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import { Inertia } from '@inertiajs/inertia';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 
 const MedicamentIndex = () => {
@@ -61,9 +62,8 @@ const MedicamentIndex = () => {
         };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Liste des Médicaments" />
+        <AdminLayout title="Liste des Médicaments">
+            
             <div className="container py-5">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="montserrat-normal fw-bold">Liste des Médicaments</h1>
@@ -171,7 +171,7 @@ const MedicamentIndex = () => {
                 draggable
                 pauseOnHover
             />
-        </>
+        </AdminLayout>
     );
 };
 

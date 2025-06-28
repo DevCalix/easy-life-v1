@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Head, Link, router } from '@inertiajs/react';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import TextInput from '@/Components/TextInput';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const IndexPromoBan = ({ promoBans, filters }) => {
     const [search, setSearch] = useState(filters.search || '');
@@ -22,18 +22,37 @@ const IndexPromoBan = ({ promoBans, filters }) => {
     };
 
     const emplacementLabels = {
-        ligne_1: 'Ligne 1',
-        ligne_2: 'Ligne 2',
-        ligne_3: 'Ligne 3',
-        gauche: 'Colonne Gauche',
-        droite: 'Colonne Droite'
-    };
+    ligne_1: 'Carousel ligne 1',
+    ligne_2: 'Carousel ligne 2',
+    ligne_3: 'Carousel ligne 3',
+    gauche: 'Gauche',
+    droite: 'Droite',
+    sp_ligne_1: 'Market Carousel ligne 1',
+    sp_ligne_2: 'Market Carousel ligne 2',
+    sp_ligne_3: 'Market Carousel ligne 3',
+    sp_gauche: 'Market Gauche',
+    sp_droite: 'Market Droite',
+    resto_ligne_1: 'Resto Carousel ligne 1',
+    resto_ligne_2: 'Resto Carousel ligne 2',
+    resto_ligne_3: 'Resto Carousel ligne 3',
+    resto_gauche: 'Resto Gauche',
+    resto_droite: 'Resto Droite',
+    st_ligne_1: 'Pharmacie Carousel ligne 1',
+    st_ligne_2: 'Pharmacie Carousel ligne 2',
+    st_ligne_3: 'Pharmacie Carousel ligne 3',
+    st_gauche: 'Pharmacie Gauche',
+    st_droite: 'Pharmacie Droite',
+    ht_ligne_1: 'Hotel Carousel ligne 1',
+    ht_ligne_2: 'Hotel Carousel ligne 2',
+    ht_ligne_3: 'Hotel Carousel ligne 3',
+    ht_gauche: 'Hotel Gauche',
+    ht_droite: 'Hotel Droite'
+};
 
     return (
-        <>
-            <Head title="Gestion des Bannières Promotionnelles" />
-            <DashboardNavbar />
-            <div className="container-fluid py-4">
+        <AdminLayout title="Gestion des Bannières Promotionnelles">
+
+            <div className="container-fluid py-2">
                 <div className="row mb-4">
                     <div className="col-12">
                         <div className="card">
@@ -132,7 +151,7 @@ const IndexPromoBan = ({ promoBans, filters }) => {
 
 
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

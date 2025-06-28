@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const PharmacieIndex = () => {
     const { pharmacies, flash } = usePage().props; // Récupérer les pharmacies depuis les props
@@ -33,9 +33,9 @@ const PharmacieIndex = () => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <div className="container py-5">
+        <AdminLayout title="Liste des Pharmacies">
+
+            <div className="container py-2">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="montserrat-normal fw-bold">Liste des Pharmacies</h1>
                     <Link href={route('pharmacie.create')} className="btn btn-primary montserrat-normal">
@@ -122,7 +122,7 @@ const PharmacieIndex = () => {
                 draggable
                 pauseOnHover
             />
-        </>
+        </AdminLayout>
     );
 };
 

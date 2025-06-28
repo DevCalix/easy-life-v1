@@ -4,7 +4,7 @@ import TextInput from '@/Components/TextInput';
 import InputLabel from '@/Components/InputLabel';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const HopitaleEdit = ({ hopital }) => {
     const { data, setData, put, processing, errors } = useForm({
@@ -29,10 +29,8 @@ const HopitaleEdit = ({ hopital }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Modifier un Hôpital" />
-            <div className="container py-5">
+        <AdminLayout title="Modifier un Hôpital">
+            <div className="container py-2">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="mb-4 montserrat-normal fw-bold">Modifier un Hôpital</h1>
                     <Link href={route('hopitaux.index')} className="btn btn-primary montserrat-normal">
@@ -83,7 +81,7 @@ const HopitaleEdit = ({ hopital }) => {
                     </div>
                 </form>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

@@ -106,5 +106,5 @@ Route::prefix('supermarche')->group(function () {
     Route::delete('/stores/{store}/informations-supplementaires/{meta}', [SupermarcheMetaController::class, 'destroy'])
         ->name('stores.informations-supplementaires.destroy');
 
-    
+
 });

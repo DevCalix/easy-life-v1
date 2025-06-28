@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Head, useForm, Link, usePage } from '@inertiajs/react';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+// import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const MetaCreate = ({ store }) => {
     const { data, setData, post, processing, errors } = useForm({
@@ -22,8 +23,8 @@ const MetaCreate = ({ store }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
+        <AdminLayout>
+            {/* <DashboardNavbar /> */}
             <Head title="Gérer les informations supplémentaires" />
             <div className="container py-5">
                 <div className="d-flex justify-content-between align-items-center mb-4">
@@ -129,7 +130,7 @@ const MetaCreate = ({ store }) => {
                     </div>
                 )}
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

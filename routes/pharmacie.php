@@ -86,10 +86,11 @@ use App\Http\Controllers\Pharmacie\GlobalPharmacieController;
          Route::get('/info-pharmacies/{id}', [GlobalPharmacieController::class, 'infoPharmacie'])->name('pharmacie.info');
          // Routes pour la gestion des hopitaux
         Route::resource('specialiste-de-sante', StMedecinController::class)->middleware('auth');
-        Route::get('/all-specialistes', [GlobalPharmacieController::class, 'allSpecialiste'])->middleware(['auth', CheckAbonneVip::class])->name('specialiste.all');
+        Route::get('/all-specialistes', [GlobalPharmacieController::class, 'allSpecialiste'])->middleware(['auth'])->name('specialiste.all');
         // Route pour afficher la page d'abonnement VIP
-        Route::get('/abonnement-vip', [StVipAbonneController::class, 'showAbonnementPage'])->name('abonnement.vip');
+        Route::get('/abonnement-vip', [StVipAbonneController::class, 'showAbonnementPage'])->name('abonnement.vip')->middleware('auth');
         Route::post('/abonnement-vip/enregistrer', [StVipAbonneController::class, 'enregistrerAbonnement']);
+        Route::get('/abonnement/confirmation', [StVipAbonneController::class, 'showConfirmationPage'])->middleware(['auth', CheckAbonneVip::class])->name('abonnement.confirmation');
 
         // Mettre à jour l'image de profil
         Route::post('/specialiste-de-sante/profil/image', [StMedecinController::class, 'updateProfileImage'])->name('medecin.profil.updateImage')->middleware('auth');
@@ -125,7 +126,7 @@ use App\Http\Controllers\Pharmacie\GlobalPharmacieController;
 
         // Afficher le formulaire de rendez-vous pour un médecin spécifique
         Route::get('/prendre-rendez-vous/{medecin}', [StRdvMedicalController::class, 'create'])
-        ->name('prendre-rendez-vous.create')->middleware(CheckAbonneVip::class)->middleware('auth');
+        ->name('prendre-rendez-vous.create')->middleware(['auth', CheckAbonneVip::class]);
 
         // Soumettre le formulaire de rendez-vous
         Route::post('/prendre-rendez-vous', [StRdvMedicalController::class, 'store'])

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Head, Link, router } from '@inertiajs/react'; // Importez router depuis Inertia
-import PiedDePageResto from '@/Layouts/Restaurant/global/PiedDePageResto';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const ListeReservations = ({ reservations }) => {
     // Fonction pour valider une réservation
@@ -47,11 +46,9 @@ const ListeReservations = ({ reservations }) => {
     };
 
     return (
-        <>
-            <Head title="Liste des Réservations" />
-            <DashboardNavbar />
+        <AdminLayout title="Liste des Réservations">
             <ToastContainer />
-            <div className="container py-5">
+            <div className="container py-1">
                 <h1 className="text-center mb-4 fw-bold montserrat-normal">Liste des Réservations</h1>
 
                 <div className="card shadow-sm">
@@ -104,8 +101,7 @@ const ListeReservations = ({ reservations }) => {
                     </div>
                 </div>
             </div>
-            <PiedDePageResto />
-        </>
+        </AdminLayout>
     );
 };
 

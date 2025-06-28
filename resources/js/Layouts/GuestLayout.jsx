@@ -11,7 +11,7 @@ export default function GuestLayout({ children }) {
                 </Link>
             </div>
 
-            <div className="mt-4 w-100 bg-white p-4 shadow rounded mx-auto" style={{ maxWidth: '24rem' }}>
+            <div className="mt-4 w-100 bg-white p-4 shadow rounded mx-auto" style={{ maxWidth: '30rem' }}>
                 {children}
             </div>
         </div>

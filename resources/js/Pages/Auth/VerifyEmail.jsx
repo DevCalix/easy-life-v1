@@ -1,50 +1,69 @@
-import PrimaryButton from '@/Components/PrimaryButton';
-import GuestLayout from '@/Layouts/GuestLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import GuestLayout from "@/Layouts/GuestLayout";
+import { useForm } from "@inertiajs/inertia-react";
+import { Head, Link } from "@inertiajs/react";
 
 export default function VerifyEmail({ status }) {
     const { post, processing } = useForm({});
 
     const submit = (e) => {
         e.preventDefault();
-
         post(route('verification.send'));
     };
 
     return (
         <GuestLayout>
-            <Head title="Email Verification" />
+            <Head title="Vérification d'e-mail" />
 
-            <div className="mb-4 text-sm text-gray-600">
-                Thanks for signing up! Before getting started, could you verify
-                your email address by clicking on the link we just emailed to
-                you? If you didn't receive the email, we will gladly send you
-                another.
+            <div className="text-center mb-4">
+                <i className="bi bi-envelope-check display-4 text-primary mb-3"></i>
+                <h2 className="h3 mb-3 fw-bold">Vérification requise</h2>
             </div>
 
-            {status === 'verification-link-sent' && (
-                <div className="mb-4 text-sm font-medium text-green-600">
-                    A new verification link has been sent to the email address
-                    you provided during registration.
+            {status === 'verification-link-sent' ? (
+                <div className="alert alert-success mb-4">
+                    <i className="bi bi-check-circle-fill me-2"></i>
+                    Un nouveau lien de vérification a été envoyé à votre adresse e-mail.
+                </div>
+            ) : (
+                <div className="alert alert-light border mb-4">
+                    <p className="mb-0">
+                        Merci pour votre inscription ! Avant de continuer, veuillez vérifier votre
+                        adresse e-mail en cliquant sur le lien que nous venons de vous envoyer.
+                    </p>
                 </div>
             )}
 
-            <form onSubmit={submit}>
-                <div className="mt-4 flex items-center justify-between">
-                    <PrimaryButton disabled={processing}>
-                        Resend Verification Email
-                    </PrimaryButton>
-
-                    <Link
-                        href={route('logout')}
-                        method="post"
-                        as="button"
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                        Log Out
-                    </Link>
-                </div>
+            <form onSubmit={submit} className="mb-4">
+                <button
+                    className="btn btn-primary w-100 py-2 mb-3"
+                    type="submit"
+                    disabled={processing}
+                >
+                    {processing ? (
+                        <>
+                            <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            Envoi en cours...
+                        </>
+                    ) : (
+                        <>
+                            <i className="bi bi-send-fill me-2"></i>
+                            Renvoyer l'e-mail de vérification
+                        </>
+                    )}
+                </button>
             </form>
+
+            <div className="text-center">
+                <Link
+                    href={route('logout')}
+                    method="post"
+                    as="button"
+                    className="btn btn-link text-decoration-none"
+                >
+                    <i className="bi bi-box-arrow-right me-2"></i>
+                    Se déconnecter
+                </Link>
+            </div>
         </GuestLayout>
     );
 }

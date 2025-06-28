@@ -2,35 +2,37 @@
 
 namespace App\Services;
 
-use App\Models\Supermarche\Produit;
-use Illuminate\Support\Facades\Http;
+use Twilio\Rest\Client;
 
 class WhatsAppService
 {
-    protected $accessToken;
-    protected $phoneId;
+    protected $twilio;
 
     public function __construct()
     {
-        $this->accessToken = env('WHATSAPP_ACCESS_TOKEN');
-        $this->phoneId = env('WHATSAPP_PHONE_ID');
+        $sid = config('services.twilio.sid');
+        $token = config('services.twilio.token');
+        $this->twilio = new Client($sid, $token);
     }
 
     public function sendMessage($to, $message)
     {
-        $url = "https://graph.facebook.com/v22.0/{$this->phoneId}/messages";
+        $from = config('services.twilio.whatsapp_from');
 
-        $response = Http::withToken($this->accessToken)
-            ->post($url, [
-                'messaging_product' => 'whatsapp',
-                'to' => $to,
-                'type' => 'text',
-                'text' => [
-                    'body' => $message,
-                ],
-            ]);
+        try {
+            $this->twilio->messages->create(
+                "whatsapp:" . $to,
+                [
+                    'from' => $from,
+                    'body' => $message
+                ]
+            );
 
-
-        return $response->json();
+            \Log::info("✅ Message WhatsApp envoyé à $to : $message");
+            return ['success' => true, 'message' => 'Message envoyé.'];
+        } catch (\Exception $e) {
+            \Log::error("❌ Erreur d’envoi WhatsApp : " . $e->getMessage());
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
     }
 }

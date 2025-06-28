@@ -14,6 +14,7 @@ use App\Http\Controllers\Supermarche\Vendeur\StoreController;
 
 
 Route::get('/vendeur/services-select', [VendeurController::class, 'devenirVendeur'])->name('vendeur.index')->middleware('auth');
+Route::get('/vendeur/services-avantage', [VendeurController::class, 'avantageVendeur'])->name('vendeur.avantage');
 Route::get('/vendeur/market-store-form', [VendeurController::class, 'marketStoreForm'])->name('vendeur.market.store.form')->middleware('auth');
 Route::get('/vendeur/restau-store-form', [VendeurController::class, 'restauStoreForm'])->name('vendeur.restau.store.form')->middleware('auth');
 Route::get('/vendeur/pharmacie-store-form', [VendeurController::class, 'pharmacieStoreForm'])->name('vendeur.pharmacie.store.form')->middleware('auth');
@@ -52,7 +53,7 @@ Route::prefix('supermarche/managers')->group(function () {
     Route::delete('/supermarche/variations/{variation}', [SpVariationController::class, 'destroy'])->name('mds-produits.variations.destroy')->middleware('auth');
 
     // Gestion des catégories
-    Route::resource('categories', SpCategorieController::class)->middleware('auth');
+    Route::resource('mds-categories', SpCategorieController::class)->middleware('auth');
     Route::get('/new-create/categories', [SpCategorieController::class, 'create'])
             ->name('mds-categories.newCreate')->middleware('auth');
     Route::put('/image-categories/{categorie}/update-image', [SpCategorieController::class, 'updateImage'])

@@ -145,6 +145,17 @@ class PaiementController extends Controller
                 $admin->notify(new NotificationAchatProduit($commande));
             }
 
+            // $whatsAppService = new WhatsAppService();
+
+            // $message = "✅ *Chers partenaires, nous voulons vous informer qu’une nouvelle commande a été confirmée.* !\n\n"
+            //         . "👤 Nom : {$commande->nom_client}\n"
+            //         . "📞 Téléphone : {$commande->telephone_client}\n"
+            //         . "💰 Montant : {$commande->montant_total} FCFA\n"
+            //         . "🧾 Référence : {$commande->reference} \n\n"
+            //         . "🙏*Merci de toujours nous faire confiance * !!!";
+
+            // // Envoi de test vers un numéro fixe
+            // $whatsAppService->sendMessage('+22995029745', $message);
             // Renvoyer une réponse Inertia
             return Inertia::render('Supermarche/Paiement/Success', [
                 'success' => true,

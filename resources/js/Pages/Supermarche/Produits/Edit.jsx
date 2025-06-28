@@ -11,6 +11,7 @@ import DatalistInput from '@/Components/DatalistInput';
 import SelectInputTom from '@/Components/SelectInputTom';
 import Checkbox from '@/Components/Checkbox';
 import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const Edit = ({ produit }) => {
     const { data, setData, put, processing, errors } = useForm({
@@ -138,11 +139,12 @@ const Edit = ({ produit }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar/>
+        <AdminLayout>
+            {/* <DashboardNavbar/> */}
             <Head title='Mise à jour'/>
-            <div className="container py-5">
-                <h1 className="mb-4">Modifier le Produit</h1>
+            <div className="container py-1">
+                <h1 className="mb-4 montserrat-normal fw-bold">Modifier le Produit</h1>
+                <hr className="border-warning border-2 opacity-75"/>
                 <form onSubmit={handleSubmit}>
                     {/* Nom du produit */}
                     <div className="mb-3">
@@ -411,7 +413,7 @@ const Edit = ({ produit }) => {
                     </div>
                 </form>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

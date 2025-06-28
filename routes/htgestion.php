@@ -7,10 +7,6 @@ use App\Http\Controllers\Managers\Hotels\HtGestionPromotionController;
 use App\Http\Controllers\Managers\Hotels\HtGestionReservationController;
 
 
-
-
-
-
 Route::prefix('hotel/managers')->group(function(){
     Route::resource('mgs-hotels', HtGestionController::class)->middleware('auth');
 
@@ -25,7 +21,7 @@ Route::prefix('hotel/managers')->group(function(){
     ->name('mgs-hotels.add-image-secondaire')->middleware('auth');
 
     Route::delete('/hotels/images/{image}', [HtGestionController::class, 'deleteImageSecondaire'])
-    ->name('hotels.delete-image-secondaire')->middleware('auth');
+    ->name('mgs-hotels.delete-image-secondaire')->middleware('auth');
 
     Route::post('/mgs-hotels/{hotel}/update-image', [HtGestionController::class, 'updateImage'])
         ->name('mgs-hotels.update-image')->middleware('auth');

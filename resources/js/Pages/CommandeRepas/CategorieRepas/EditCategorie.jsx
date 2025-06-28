@@ -6,8 +6,7 @@ import Textarea from '@/Components/Textarea';
 import FileInput from '@/Components/FileInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import InputError from '@/Components/InputError';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
-import PiedDePageResto from '@/Layouts/Restaurant/global/PiedDePageResto';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const EditCategorie = ({ categorie }) => {
     // Formulaire pour les informations générales
@@ -54,12 +53,12 @@ const EditCategorie = ({ categorie }) => {
     };
 
     return (
-        <>
-            <Head title="Modifier une Catégorie" />
-            <DashboardNavbar/>
-            <div className="container py-5">
-                <h1 className="mb-4">Modifier la Catégorie</h1>
-
+        <AdminLayout title="Modifier une Catégorie">
+            
+            {/* <DashboardNavbar/> */}
+            <div className="container py-1">
+                <h1 className="mb-4 montserrat-normal fw-bold">Modifier la Catégorie</h1>
+                <hr className="border border-warning border-1 opacity-75" />
                 {/* Formulaire pour les informations générales */}
                 <form onSubmit={handleGeneralSubmit} className="mb-5">
                     <div className="mb-3">
@@ -118,8 +117,7 @@ const EditCategorie = ({ categorie }) => {
                     </div>
                 </form>
             </div>
-            <PiedDePageResto/>
-        </>
+        </AdminLayout>
     );
 };
 

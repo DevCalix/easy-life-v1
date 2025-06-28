@@ -1,3 +1,4 @@
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import { Inertia } from '@inertiajs/inertia';
 import { Head, Link, usePage } from '@inertiajs/react';
@@ -32,17 +33,16 @@ const RestaurantIndex = ({ restaurants }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar/>
-            <Head title="Liste des Restaurants" />
-            <div className="container py-5">
+        <AdminLayout title="Liste des Restaurants">
+            
+            <div className="container py-2">
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                    <h1>Liste des Restaurants</h1>
+                    <h1 className="montserrat-normal fw-bold">Liste des Restaurants</h1>
                     <Link href="/commande-repas/restaurant/create" className="btn btn-primary">
                         Ajouter un Restaurant
                     </Link>
                 </div>
-
+                <hr className="border-2 border-warning opacity-75"/>
                 <div className="table-responsive">
                     <table className="table table-striped table-hover">
                         <thead className="table-dark">
@@ -100,7 +100,7 @@ const RestaurantIndex = ({ restaurants }) => {
                 draggable
                 pauseOnHover
             />
-        </>
+        </AdminLayout>
     );
 };
 

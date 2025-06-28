@@ -7,7 +7,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import FileInput from "@/Components/FileInput";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import DashboardNavbar from "@/Layouts/Supermarche/admin/DashboardNavbar";
+import AdminLayout from "@/Layouts/Admin/AdminLayout";
 
 const MedicamentVariationForm = ({ medicament, flash }) => {
     const [variations, setVariations] = useState(medicament.variations || []);
@@ -89,10 +89,9 @@ const MedicamentVariationForm = ({ medicament, flash }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar/>
-            <Head title="Variations liées au medicament"/>
-            <div className="container my-5">
+        <AdminLayout title="Gérer les variations du médicament">
+
+            <div className="container my-2">
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h3 className="fw-bold mb-4">Gérer les variations du médicament</h3>
                 <Link href={route('medicaments.index')} className="btn btn-warning montserrat-normal">
@@ -207,7 +206,7 @@ const MedicamentVariationForm = ({ medicament, flash }) => {
                 </div>
             </div>
             <ToastContainer position="bottom-right" autoClose={3000} />
-        </>
+        </AdminLayout>
     );
 };
 

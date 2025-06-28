@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers\Pharmacie;
 
-use Inertia\Inertia;
-use Inertia\Response;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\PharmacieSante\StAbonneVip;
 use App\Models\PharmacieSante\StCommande;
 use App\Models\PharmacieSante\StRdvMedical;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class StProfileController extends Controller
 {
     public function stProfil(Request $request)
     {
+        // Récupérer l'abonnement VIP s'il existe
         $user = $request->user();
+        $abonnementVip = StAbonneVip::where('user_id', $user->id)->first();
         $commandes = StCommande::where('user_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->with(['details.medicament']) // Charger les détails de la commande et les médicaments associés
@@ -34,21 +38,34 @@ class StProfileController extends Controller
             return $commande;
         });
 
-        // Récupérer les rendez-vous de l'utilisateur avec le médecin associé
-        $rendezVous = StRdvMedical::where('user_id', $user->id)
-        ->with('medecin') // Charger les informations du médecin
-        ->orderBy('date', 'desc')
-        ->get();
+        // Récupérer les rendez-vous où l'utilisateur est soit le patient, soit le médecin
+$rendezVous = StRdvMedical::where(function ($query) use ($user) {
+    $query->where('user_id', $user->id);
+    if ($user->medecin) {
+        $query->orWhere('st_medecin_id', $user->medecin->id);
+    }
+})
+->with(['user', 'medecin'])
+->orderBy('date', 'desc')
+->get();
 
 
+        // dd($rendezVous);
         // Vérifier si l'utilisateur est un médecin
         $isMedecin = $user->medecin !== null;
-        // dd($isMedecin);
+        // dd($rendezVous);
         return Inertia::render('PharmacieSante/Profil/StProfile', [
             'user' => $user,
+            'currentUser' => $user,
             'commandes' => $commandes,
             'rendezVous' => $rendezVous,
             'isMedecin' => $isMedecin,
+            'abonnementVip' => $abonnementVip ? [
+                'type' => $abonnementVip->type_abonnement,
+               'expire_at' => $abonnementVip->expire_at ? Carbon::parse($abonnementVip->expire_at)->format('d/m/Y') : null,
+
+                'estActif' => $abonnementVip->estActif()
+                ] : null
         ]);
     }
 

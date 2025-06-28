@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Head, usePage } from '@inertiajs/react';
 import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 export default function CommandesIndex({ commandes }) {
     const { props } = usePage();
@@ -13,10 +14,10 @@ export default function CommandesIndex({ commandes }) {
     );
 
     return (
-        <>
+        <AdminLayout>
             <Head title="Liste des Commandes" />
-            <DashboardNavbar />
-            <div className="container py-5">
+            {/* <DashboardNavbar /> */}
+            <div className="container py-3">
                 <h4 className="text-center mb-4 fw-bold text-primary montserrat">📦 Liste des Commandes</h4>
 
                 {/* Filtres Modernes */}
@@ -68,6 +69,6 @@ export default function CommandesIndex({ commandes }) {
                     </div>
                 )) : <p className="text-center text-muted">Aucune commande trouvée.</p>}
             </div>
-        </>
+        </AdminLayout>
     );
 }

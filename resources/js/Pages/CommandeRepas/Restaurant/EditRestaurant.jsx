@@ -7,6 +7,7 @@ import SelectInput from '@/Components/SelectInput';
 import FileInput from '@/Components/FileInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import InputError from '@/Components/InputError';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const EditRestaurant = ({ restaurant }) => {
     const { props } = usePage(); // Accéder aux props transmises par Laravel
@@ -75,9 +76,8 @@ const EditRestaurant = ({ restaurant }) => {
     console.log(restaurant.rating); // Vérifiez ce qui est transmis dans `props`
 
     return (
-        <>
-            <Head title="Modifier un Restaurant" />
-            <div className="container py-5">
+        <AdminLayout title="Modifier un Restaurant">
+            <div className="container py-2">
                 <h1 className="mb-4 montserrat-normal fw-bold">Modifier le Restaurant</h1>
                 <hr/>
                 {/* Formulaire pour les informations générales */}
@@ -150,7 +150,7 @@ const EditRestaurant = ({ restaurant }) => {
                     </div>
                 </form>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

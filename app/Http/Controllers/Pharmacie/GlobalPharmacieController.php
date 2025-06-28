@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pharmacie;
 
 use App\Http\Controllers\Controller;
 use App\Models\Global\PromoBan;
+use App\Models\PharmacieSante\StAbonneVip;
 use App\Models\PharmacieSante\StCategorie;
 use App\Models\PharmacieSante\StHopital;
 use App\Models\PharmacieSante\StMedecin;
@@ -20,16 +21,16 @@ class GlobalPharmacieController extends Controller
         $pharmacie = StPharmacie::where('pharmacie_de_garde', true)->get();
         $pharmacies = StPharmacie::All();
         $categories = StCategorie::with('medicaments')->get();
-        $medecins = StMedecin::limit(3)->get();
+        $medecins = StMedecin::all();
 
         // Récupérer les médicaments urgents
         $medicamentsUrgents = StMedicament::where('medicament_urgent', true)->get();
 
-        $ligne1 = PromoBan::where("statut", 1)->where("emplacement", "ligne_1")->get();
-        $ligne2 = PromoBan::where("statut", 1)->where("emplacement", "ligne_2")->get();
-        $ligne3 = PromoBan::where("statut", 1)->where("emplacement", "ligne_3")->get();
-        $gauche = PromoBan::where("statut", 1)->where("emplacement", "gauche")->get();
-        $droite = PromoBan::where("statut", 1)->where("emplacement", "droite")->get();
+        $ligne1 = PromoBan::where("statut", 1)->where("emplacement", "st_ligne_1")->get();
+        $ligne2 = PromoBan::where("statut", 1)->where("emplacement", "st_ligne_2")->get();
+        $ligne3 = PromoBan::where("statut", 1)->where("emplacement", "st_ligne_3")->get();
+        $gauche = PromoBan::where("statut", 1)->where("emplacement", "st_gauche")->get();
+        $droite = PromoBan::where("statut", 1)->where("emplacement", "st_droite")->get();
         return Inertia::render('PharmacieSante/PharmacieAccueil',[
             'pharmacieDeGarde' => $pharmacieDeGarde,
             'pharmacies' => $pharmacies,
@@ -153,8 +154,31 @@ class GlobalPharmacieController extends Controller
         return response()->json($suggestions);
     }
 
-    public function allSpecialiste(){
-        $medecins = StMedecin::all(); // Récupérer tous les médecins
+    public function allSpecialiste()
+    {
+        $userId = auth()->id();
+
+        // Récupérer l’abonnement VIP actif (expire_at > maintenant)
+        $abonnement = StAbonneVip::where('user_id', $userId)
+            ->where('expire_at', '>', now())
+            ->first();
+
+        if (!$abonnement) {
+            // Aucun abonnement actif => aucun médecin
+            $medecins = StMedecin::all();
+        } else {
+            // Déterminer le type d'abonnement et filtrer les médecins en conséquence
+            if ($abonnement->type_abonnement === 'generaliste') {
+                // Médecins généralistes uniquement
+                $medecins = StMedecin::where('type', 'généraliste')->get();
+            } elseif ($abonnement->type_abonnement === 'specialiste') {
+                // Médecins spécialistes uniquement (≠ généraliste)
+                $medecins = StMedecin::all();
+            } else {
+                // Cas par défaut : tous les médecins
+                $medecins = StMedecin::all();
+            }
+        }
         return Inertia::render('PharmacieSante/Medecin/allSpecialiste', [
             'medecins' => $medecins,
         ]);

@@ -105,7 +105,7 @@ export default function CommandeDirecte() {
         }
     };
 
-    const handleSubmitTest = async () => {
+    con = async () => {
         setLoading(true);
         setError(null);
 

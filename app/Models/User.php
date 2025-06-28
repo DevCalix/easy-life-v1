@@ -12,11 +12,15 @@ use App\Models\PharmacieSante\StRdvMedical;
 use App\Models\Restaurant\CategorieRepas;
 use App\Models\Supermarche\Categorie;
 use App\Models\Supermarche\Store;
+use App\Models\UserProfile;
+use App\Notifications\ResetPasswordCustom;
+use App\Notifications\VerifyEmailCustom;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -55,6 +59,15 @@ class User extends Authenticatable
         ];
     }
 
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmailCustom);
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordCustom($token));
+    }
     // Relation one-to-one avec StAbonneVip
     public function abonneVip()
     {
@@ -99,6 +112,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(StCategorie::class, 'pharma_categorie_users', 'user_id', 'st_categories_id');
     }
+
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
+
 
 
 }

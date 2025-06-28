@@ -47,11 +47,11 @@ class AccueilSupermarcheController extends Controller
         $categories = Categorie::all();
         $stores = Store::all(); // Récupérer tous les stores
 
-        $ligne1 = PromoBan::where("statut", 1)->where("emplacement", "ligne_1")->get();
-        $ligne2 = PromoBan::where("statut", 1)->where("emplacement", "ligne_2")->get();
-        $ligne3 = PromoBan::where("statut", 1)->where("emplacement", "ligne_3")->get();
-        $gauche = PromoBan::where("statut", 1)->where("emplacement", "gauche")->get();
-        $droite = PromoBan::where("statut", 1)->where("emplacement", "droite")->get();
+        $ligne1 = PromoBan::where("statut", 1)->where("emplacement", "sp_ligne_1")->get();
+        $ligne2 = PromoBan::where("statut", 1)->where("emplacement", "sp_ligne_2")->get();
+        $ligne3 = PromoBan::where("statut", 1)->where("emplacement", "sp_ligne_3")->get();
+        $gauche = PromoBan::where("statut", 1)->where("emplacement", "sp_gauche")->get();
+        $droite = PromoBan::where("statut", 1)->where("emplacement", "sp_droite")->get();
         // Retourner les données à la vue Inertia
         return Inertia::render('Supermarche/SupermarcheAccueil', [
             'produitsPopulaires' => $produitsPopulaires,

@@ -27,7 +27,7 @@ export default function DashboardNavbar() {
                         </button>
                         <a className="navbar-brand poppins-bold" href="/supermarche">
                             <img
-                                src="/images/logo/LOGO-ESAY-LIFE-VERT.png"
+                                src="/images/logo/LOGO-ESAY.png"
                                 alt="Easy Life Logo"
                                 style={{ width: "100px", objectFit: "contain" }}
                                 className="me-2"

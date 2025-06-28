@@ -46,6 +46,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('easy-life', absolute: false));
+        return redirect(route('user-profile.index', absolute: false));
     }
 }

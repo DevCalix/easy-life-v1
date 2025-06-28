@@ -10,8 +10,8 @@ export default function DevenirVendeur() {
                             <p className="montserrat-normal">
                                 Proposez vos services à des milliers de clients et augmentez votre visibilité
                             </p>
-                            
-                            
+
+
                             {/* <div className="row g-2">
                                 {[
                                     { name: "Super marché", icon: "🛒" },
@@ -28,8 +28,8 @@ export default function DevenirVendeur() {
                                 ))}
                             </div> */}
 
-                            <Link 
-                                href={route('vendeur.index')}
+                            <Link
+                                href={route('vendeur.avantage')}
                                 className="btn btn-primary px-4"
                             >
                                 Commencer l'inscription <i className="bi bi-arrow-right ms-2"></i>

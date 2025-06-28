@@ -4,6 +4,7 @@ import InputLabel from '@/Components/InputLabel';
 import FileInput from '@/Components/FileInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import InputError from '@/Components/InputError';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const EditImage = ({ produit }) => {
     const { props } = usePage(); // Accéder aux props transmises par Laravel
@@ -52,39 +53,41 @@ const EditImage = ({ produit }) => {
     };
 
     return (
-        <div className="container py-5">
-            <h2 className="mb-4">Mettre à jour l'image principale</h2>
-            <form onSubmit={handleSubmit} encType="multipart/form-data">
-                {/* Champ pour l'image */}
-                <div className="mb-3">
-                    <InputLabel htmlFor="image_principale" value="Image Principale" />
-                    <FileInput
-                        id="image_principale"
-                        name="image_principale"
-                        onChange={handleImageChange}
-                        accept="image/*" // Limite les fichiers aux images
-                    />
-                    {imagePreview && (
-                        <div className="mt-3">
-                            <img
-                                src={imagePreview}
-                                alt="Aperçu de l'image"
-                                className="img-thumbnail"
-                                style={{ maxHeight: '200px' }}
-                            />
-                        </div>
-                    )}
-                    <InputError message={errors.image_principale} className="mt-2" />
-                </div>
+        <AdminLayout>
+            <div className="container py-3">
+                <h2 className="mb-4 montserrat-normal">Mettre à jour l'image principale</h2>
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
+                    {/* Champ pour l'image */}
+                    <div className="mb-3">
+                        <InputLabel htmlFor="image_principale" value="Image Principale" />
+                        <FileInput
+                            id="image_principale"
+                            name="image_principale"
+                            onChange={handleImageChange}
+                            accept="image/*" // Limite les fichiers aux images
+                        />
+                        {imagePreview && (
+                            <div className="mt-3">
+                                <img
+                                    src={imagePreview}
+                                    alt="Aperçu de l'image"
+                                    className="img-thumbnail"
+                                    style={{ maxHeight: '200px' }}
+                                />
+                            </div>
+                        )}
+                        <InputError message={errors.image_principale} className="mt-2" />
+                    </div>
 
-                {/* Bouton de soumission */}
-                <div className="mb-3">
-                    <PrimaryButton disabled={processing || !data.image_principale}>
-                        {processing ? 'Mise à jour en cours...' : 'Mettre à jour l\'image'}
-                    </PrimaryButton>
-                </div>
-            </form>
-        </div>
+                    {/* Bouton de soumission */}
+                    <div className="mb-3">
+                        <PrimaryButton disabled={processing || !data.image_principale}>
+                            {processing ? 'Mise à jour en cours...' : 'Mettre à jour l\'image'}
+                        </PrimaryButton>
+                    </div>
+                </form>
+            </div>
+        </AdminLayout>
     );
 };
 

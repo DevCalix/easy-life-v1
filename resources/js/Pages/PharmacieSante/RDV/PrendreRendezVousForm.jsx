@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Head, Link, useForm } from "@inertiajs/react";
 import PharmaNavbar from "@/Layouts/PharmacieSante/PharmaNavbar";
 import PharmacieFooter from "@/Layouts/PharmacieSante/PharmacieFooter";
@@ -9,6 +9,15 @@ import TextInput from "@/Components/TextInput";
 import TextArea from "@/Components/TextArea";
 
 export default function PrendreRendezVousForm({ medecin }) {
+
+    useEffect(() => {
+    // Supprimer les backdrop Bootstrap restés actifs
+    const backdrops = document.querySelectorAll('.modal-backdrop');
+    backdrops.forEach((backdrop) => backdrop.remove());
+    // S’assurer que le body n’a plus la classe modal-open
+    document.body.classList.remove('modal-open');
+    }, []);
+
     const { data, setData, post, processing, errors } = useForm({
         st_medecin_id: medecin.id,
         date: "",
@@ -19,6 +28,7 @@ export default function PrendreRendezVousForm({ medecin }) {
     // États pour le Modal
     const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
+    const [showRenewButton, setShowRenewButton] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,20 +36,36 @@ export default function PrendreRendezVousForm({ medecin }) {
             onSuccess: () => {
                 setModalMessage("Votre demande de rendez-vous a été envoyée avec succès ! Veuillez revenir plutard consulté le statut dans votre espace membre.");
                 setShowModal(true);
+                setShowRenewButton(false); // Pas besoin du bouton si succès
+                    // Attendre un petit délai pour que l’utilisateur lise le message
+                    setTimeout(() => {
+                        window.location.href = route("specialiste.all");
+                    }, 2000);
             },
-            onError: () => {
-                setModalMessage("Une erreur est survenue. Veuillez réessayer.");
+            onError: (errors) => {
+                if (errors.rdv_error) {
+                    // Cas particulier : limite de 2 RDV
+                    setModalMessage(errors.rdv_error);
+                    setShowRenewButton(true);
+                } else {
+                    setModalMessage("Une erreur est survenue. Veuillez réessayer.");
+                    setShowRenewButton(false);
+                }
                 setShowModal(true);
             },
         });
     };
 
+    const handleGoToAbonnement = () => {
+        window.location.href = route("abonnement.vip"); // ➜ Redirection vers la page d’abonnement
+    };
+
     return (
         <>
             <Head title="Prendre un Rendez-vous" />
-            <PharmaNavbar />
+            {/* <PharmaNavbar /> */}
 
-            <div className="container py-5">
+            <div className="container py-3">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <div className="card shadow-lg p-4">
@@ -92,7 +118,7 @@ export default function PrendreRendezVousForm({ medecin }) {
 
                                 {/* Champ Message */}
                                 <div className="mb-3">
-                                    <InputLabel htmlFor="message" value="Message (facultatif)" />
+                                    <InputLabel htmlFor="message" value="Message (Symptômes)" />
                                     <TextArea
                                         id="message"
                                         name="message"
@@ -115,7 +141,7 @@ export default function PrendreRendezVousForm({ medecin }) {
                 </div>
             </div>
 
-            <PharmacieFooter />
+            {/* <PharmacieFooter /> */}
 
             {/* Modal de Confirmation */}
             {showModal && (
@@ -133,6 +159,14 @@ export default function PrendreRendezVousForm({ medecin }) {
                                 <button className="btn btn-primary" onClick={() => setShowModal(false)}>
                                     Fermer
                                 </button>
+                                {showRenewButton && (
+                                <button
+                                    className="btn btn-success"
+                                    onClick={handleGoToAbonnement}
+                                >
+                                    Renouveler mon abonnement
+                                </button>
+                                )}
                             </div>
                         </div>
                     </div>

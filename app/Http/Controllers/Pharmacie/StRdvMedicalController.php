@@ -36,6 +36,22 @@ class StRdvMedicalController extends Controller
             'message' => 'nullable|string|max:500',
         ]);
 
+        $user = auth()->user();
+
+        // Vérifier si l'utilisateur a un abonnement actif
+        $abonnement = $user->abonneVip;
+
+        if (!$abonnement || $abonnement->expire_at < now()) {
+            return back()->withErrors(['rdv_error' => 'Vous n\'avez pas d\'abonnement actif.']);
+        }
+
+        // Vérifier s’il reste des rendez-vous
+        if ($abonnement->rdv_restants <= 0) {
+            return back()->withErrors([
+                'rdv_error' => 'Vous avez déjà pris vos deux rendez-vous pour cet abonnement.',
+            ])->with('showAbonnementButton', true);
+        }
+
         // Créer le rendez-vous
         StRdvMedical::create([
             'user_id' => auth()->id(),
@@ -46,6 +62,9 @@ class StRdvMedicalController extends Controller
             'statut' => 'en_attente', // Par défaut, le statut est "en_attente"
         ]);
 
+        // Décrémenter le compteur de rendez-vous restants
+        $abonnement->decrement('rdv_restants');
+        
         return redirect()->route('prendre-rendez-vous.create', ['medecin' => $request->st_medecin_id])->with('success', 'Votre demande de rendez-vous a été envoyée avec succès ! Veuillez revenir plutard consulté le statut dans votre espace membre.');
     }
 
@@ -101,7 +120,7 @@ class StRdvMedicalController extends Controller
             'statut' => 'confirmé',
         ]);
 
-        return redirect()->route('profile.stUser')->with('success', 'Rendez-vous confirmé avec succès !');
+        return redirect()->route('profile.stUser')->with('rdv_confirm', 'Rendez-vous confirmé avec succès !');
     }
 
     public function annuler(StRdvMedical $rdv)
@@ -110,6 +129,6 @@ class StRdvMedicalController extends Controller
             'statut' => 'annulé',
         ]);
 
-        return redirect()->route('profile.stUser')->with('success', 'Rendez-vous annulé avec succès !');
+        return redirect()->route('profile.stUser')->with('rdv_confirm', 'Rendez-vous annulé avec succès !');
     }
 }

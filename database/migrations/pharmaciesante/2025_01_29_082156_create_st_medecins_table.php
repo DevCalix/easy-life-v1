@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('carte')->nullable();
             $table->string('image_principale')->nullable();
             $table->decimal('note', 3, 2)->nullable()->default(0);
+            $table->string('type')->default('généraliste');
+            $table->integer('nombre_d_annee_experience')->nullable();
+            $table->text('a_propos')->nullable();
             $table->timestamps();
         });
     }

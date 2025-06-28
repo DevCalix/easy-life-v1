@@ -4,9 +4,9 @@ import TextInput from '@/Components/TextInput';
 import InputLabel from '@/Components/InputLabel';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const Edit = ({ contactInfo }) => {
     const { data, setData, put, processing, errors } = useForm({
@@ -41,10 +41,9 @@ const Edit = ({ contactInfo }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Modifier le numéro de contact" />
-            <div className="container py-5">
+        <AdminLayout title="Modifier le numéro de contact">
+
+            <div className="container py-2">
                 <div className="card shadow p-4">
                     <h1 className="mb-4 text-center montserrat-normal fw-bold">
                         Modifier le numéro de contact
@@ -85,7 +84,7 @@ const Edit = ({ contactInfo }) => {
                 draggable
                 pauseOnHover
             />
-        </>
+        </AdminLayout>
     );
 };
 

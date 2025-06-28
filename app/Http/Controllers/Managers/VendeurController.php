@@ -8,10 +8,14 @@ use Illuminate\Http\Request;
 
 class VendeurController extends Controller
 {
+    public function avantageVendeur()
+    {
+        return Inertia::render('Managers/Vendeur/AvantagesVendeur');
+    }
     public function devenirVendeur()
     {
         $userServices = [];
-        
+
         if (auth()->check()) {
             $userServices = auth()->user()->services()
                 ->get()
@@ -21,7 +25,7 @@ class VendeurController extends Controller
                     ];
                 });
         }
-    
+
         return Inertia::render('Managers/Vendeur/ServiceSelection', [
             'auth' => [
                 'user' => auth()->user() ? [
@@ -41,7 +45,7 @@ private function mapServiceType($type)
         'App\\Models\\Pharmacie\\Pharmacie' => 'pharmacie',
         'App\\Models\\Hotel\\Hotel' => 'hotel',
     ];
-    
+
     return $mapping[$type] ?? $type;
 }
 

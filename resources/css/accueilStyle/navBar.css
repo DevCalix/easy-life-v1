@@ -1,0 +1,53 @@
+        .submenu-container {
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .submenu-scroller {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          display: flex;
+        justify-content: center; /* Nouveau */
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        }
+
+        .submenu-scroller::-webkit-scrollbar {
+          display: none;
+        }
+
+        .submenu-item {
+          white-space: nowrap;
+          padding: 0.5rem 1.25rem;
+          margin: 0 0.25rem;
+          border-radius: 20px;
+          font-size: 0.8rem;
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 500;
+          background-color: rgba(255,255,255,0.1);
+          transition: all 0.2s ease;
+          flex-shrink: 0;
+        }
+
+        .submenu-item:hover {
+          background-color: rgba(255,255,255,0.2);
+          transform: scale(1.05);
+        }
+
+        .arrow-btn {
+          width: 30px;
+          height: 30px;
+          opacity: 0.9;
+          transition: opacity 0.2s;
+        }
+
+        .arrow-btn:hover {
+          opacity: 1;
+          transform: scale(1.1);
+        }
+
+        @media (max-width: 767.98px) {
+          .submenu-item {
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
+          }
+        }

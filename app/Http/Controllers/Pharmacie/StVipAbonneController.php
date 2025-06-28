@@ -26,6 +26,7 @@ class StVipAbonneController extends Controller
             'nom_client' => 'required|string',
             'email_client' => 'required|email',
             'telephone_client' => 'required|string',
+            'type_abonnement' => 'required|string|in:generaliste,specialiste',
         ]);
         // Vérifie si l'utilisateur est authentifié
         $user = Auth::user();
@@ -35,9 +36,13 @@ class StVipAbonneController extends Controller
         }
 
         // Crée ou met à jour l'abonnement de l'utilisateur
-        $abonnement = StAbonneVip::updateOrCreate(
+            $abonnement = StAbonneVip::updateOrCreate(
             ['user_id' => $user->id],
-            ['expire_at' => Carbon::now()->addDays(30)]
+            [
+                'expire_at' => Carbon::now()->addDays(30),
+                'type_abonnement' => $request->type_abonnement,
+                'rdv_restants' => 2,
+            ]
         );
 
         $clientVip = $user->name;
@@ -47,6 +52,23 @@ class StVipAbonneController extends Controller
             $admin->notify(new NotificationAbonnementVip($abonnement, $clientVip));
         }
 
-        return redirect()->intended(route('abonnement.vip'))->with('success', 'Votre abonnement VIP a été activé avec succès !');
+        return redirect()->intended(route('abonnement.confirmation'))->with('success', 'Votre abonnement VIP a été activé avec succès !');
+    }
+
+    public function showConfirmationPage(Request $request)
+    {
+        $type = StAbonneVip::where('user_id', Auth::id())
+            ->value('type_abonnement');
+        $expiration = StAbonneVip::where('user_id', Auth::id())
+            ->value('expire_at');
+        // Formater la date si elle existe
+        $formattedExpiration = $expiration
+            ? Carbon::parse($expiration)->format('d/m/Y')
+            : null;
+
+        return Inertia::render('PharmacieSante/Clients/AbonnementConfirmation', [
+            'type' => $type,
+            'expiration' => $formattedExpiration,
+        ]);
     }
 }

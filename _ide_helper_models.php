@@ -84,6 +84,31 @@ namespace App\Models\Global{
  * 
  *
  * @property int $id
+ * @property string|null $image
+ * @property string|null $lien
+ * @property string $emplacement
+ * @property bool $statut
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PromoBan newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PromoBan newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PromoBan query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PromoBan whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PromoBan whereEmplacement($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PromoBan whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PromoBan whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PromoBan whereLien($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PromoBan whereStatut($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PromoBan whereUpdatedAt($value)
+ */
+	class PromoBan extends \Eloquent {}
+}
+
+namespace App\Models\Global{
+/**
+ * 
+ *
+ * @property int $id
  * @property string|null $promo_banner
  * @property string|null $redirect_url
  * @property int $statut
@@ -100,6 +125,37 @@ namespace App\Models\Global{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PromoBanner whereUpdatedAt($value)
  */
 	class PromoBanner extends \Eloquent {}
+}
+
+namespace App\Models\Global{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $section
+ * @property string $nom_produit
+ * @property float|null $prix
+ * @property float|null $prix_promotion
+ * @property float|null $pourcentage_promotion
+ * @property string $image
+ * @property string $lien_redirection
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SectionAccueil newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SectionAccueil newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SectionAccueil query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SectionAccueil whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SectionAccueil whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SectionAccueil whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SectionAccueil whereLienRedirection($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SectionAccueil whereNomProduit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SectionAccueil wherePourcentagePromotion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SectionAccueil wherePrix($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SectionAccueil wherePrixPromotion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SectionAccueil whereSection($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SectionAccueil whereUpdatedAt($value)
+ */
+	class SectionAccueil extends \Eloquent {}
 }
 
 namespace App\Models\HotelReservation{
@@ -540,15 +596,19 @@ namespace App\Models\PharmacieSante{
  * @property int $id
  * @property int $user_id
  * @property string $expire_at
+ * @property string $type_abonnement
+ * @property int $rdv_restants
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User|null $user
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StAbonneVip newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StAbonneVip newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StAbonneVip query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StAbonneVip whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StAbonneVip whereExpireAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StAbonneVip whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StAbonneVip whereRdvRestants($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StAbonneVip whereTypeAbonnement($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StAbonneVip whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StAbonneVip whereUserId($value)
  */
@@ -748,6 +808,9 @@ namespace App\Models\PharmacieSante{
  * @property string|null $carte
  * @property string|null $image_principale
  * @property string|null $note
+ * @property string $type
+ * @property int|null $nombre_d_annee_experience
+ * @property string|null $a_propos
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PharmacieSante\StRdvMedical> $rdvs
@@ -756,6 +819,7 @@ namespace App\Models\PharmacieSante{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereAPropos($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereAdresse($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereCarte($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereCreatedAt($value)
@@ -763,9 +827,11 @@ namespace App\Models\PharmacieSante{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereImagePrincipale($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereNom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereNombreDAnneeExperience($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereNote($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereSpecialite($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereTelephone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StMedecin whereUserId($value)
  */
@@ -1401,6 +1467,30 @@ namespace App\Models{
 	class Role extends \Eloquent {}
 }
 
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $title
+ * @property string $url
+ * @property int $is_active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $formatted_url
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Submenu newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Submenu newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Submenu query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Submenu whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Submenu whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Submenu whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Submenu whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Submenu whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Submenu whereUrl($value)
+ */
+	class Submenu extends \Eloquent {}
+}
+
 namespace App\Models\Supermarche{
 /**
  * 
@@ -1721,6 +1811,33 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property string $section
+ * @property string $nom
+ * @property string|null $description
+ * @property string $image
+ * @property string $lien_redirection
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TopVendeur newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TopVendeur newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TopVendeur query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TopVendeur whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TopVendeur whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TopVendeur whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TopVendeur whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TopVendeur whereLienRedirection($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TopVendeur whereNom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TopVendeur whereSection($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TopVendeur whereUpdatedAt($value)
+ */
+	class TopVendeur extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
  * @property string $name
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
@@ -1737,6 +1854,7 @@ namespace App\Models{
  * @property-read \App\Models\PharmacieSante\StMedecin|null $medecin
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \App\Models\UserProfile|null $profile
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PharmacieSante\StRdvMedical> $rdvs
  * @property-read int|null $rdvs_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Managers\UserService> $services
@@ -1757,5 +1875,41 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string|null $numero
+ * @property string|null $adresse
+ * @property string|null $ville
+ * @property string|null $pays
+ * @property string|null $date_naissance
+ * @property string|null $genre
+ * @property string|null $bio
+ * @property string|null $photo_profil
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereAdresse($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereBio($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereDateNaissance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereGenre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereNumero($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile wherePays($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile wherePhotoProfil($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereVille($value)
+ */
+	class UserProfile extends \Eloquent {}
 }
 

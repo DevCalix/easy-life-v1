@@ -6,6 +6,7 @@ import InputError from '@/Components/InputError';
 import FileInput from '@/Components/FileInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 export default function Edit({ banner }) {
     const { props } = usePage();
@@ -70,10 +71,9 @@ export default function Edit({ banner }) {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Modifier la bannière" />
-            <div className="container py-5">
+        <AdminLayout title="Modifier la bannière">
+
+            <div className="container py-2">
                 <div className="card shadow p-4">
                     <h1 className="mb-4 text-center montserrat-normal fw-bold">Modifier la bannière</h1>
                     {flash.success && (
@@ -169,6 +169,6 @@ export default function Edit({ banner }) {
                     </div>
                 </div>
             </div>
-        </>
+        </AdminLayout>
     );
 }

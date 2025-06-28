@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Head, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 import TextInput from '@/Components/TextInput';
 import InputLabel from '@/Components/InputLabel';
 import InputError from '@/Components/InputError';
 import FileInput from '@/Components/FileInput';
 import PrimaryButton from '@/Components/PrimaryButton';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const Create = () => {
     const { data, setData, post, processing, errors } = useForm({
@@ -42,9 +42,8 @@ const Create = () => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Ajouter une bannière" />
+        <AdminLayout title="Ajouter une bannière">
+
             <div className="container py-5">
                 <div className="card shadow p-4">
                     <h1 className="mb-4 text-center montserrat-normal fw-bold">Ajouter une bannière</h1>
@@ -111,7 +110,7 @@ const Create = () => {
                     </form>
                 </div>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

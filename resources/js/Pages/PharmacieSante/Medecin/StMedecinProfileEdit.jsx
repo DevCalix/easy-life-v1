@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Head, useForm, router } from '@inertiajs/react';
+import React, { useEffect, useState } from 'react';
+import { Head, useForm, router, usePage } from '@inertiajs/react';
 import TextInput from '@/Components/TextInput';
 import InputLabel from '@/Components/InputLabel';
 import InputError from '@/Components/InputError';
@@ -7,19 +7,23 @@ import FileInput from '@/Components/FileInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import PharmaNavbar from '@/Layouts/PharmacieSante/PharmaNavbar';
 import PharmacieFooter from '@/Layouts/PharmacieSante/PharmacieFooter';
+import { Modal } from 'bootstrap';
 
 const StMedecinProfileEdit = ({ medecin }) => {
     const { data, setData, put, processing, errors } = useForm({
         nom: medecin.nom,
         specialite: medecin.specialite,
+        type: medecin.type,
         adresse: medecin.adresse,
         telephone: medecin.telephone,
         email: medecin.email,
         carte: medecin.carte,
+        nombre_d_annee_experience: medecin.nombre_d_annee_experience,
+        a_propos: medecin.a_propos,
     });
 
     const [imagePreview, setImagePreview] = useState(medecin.image_principale ? medecin.image_principale : null);
-
+    const { flash } = usePage().props;
     // Soumission du formulaire de mise à jour des informations
     const handleUpdateInfo = (e) => {
         e.preventDefault();
@@ -58,6 +62,16 @@ const StMedecinProfileEdit = ({ medecin }) => {
             reader.readAsDataURL(file);
         }
     };
+
+    useEffect(() => {
+        if (flash?.success) {
+          const modalEl = document.getElementById("successModal");
+          if (modalEl) {
+            const modal = new Modal(modalEl);
+            modal.show();
+          }
+        }
+      }, [flash]);
 
     return (
         <>
@@ -126,6 +140,25 @@ const StMedecinProfileEdit = ({ medecin }) => {
                                     />
                                     <InputError message={errors.specialite} className="mt-2" />
                                 </div>
+                                {/* Type */}
+                                <div className="mb-3">
+                                    <InputLabel htmlFor="type" value="Type de médecin" />
+                                    <select
+                                        id="type"
+                                        name="type"
+                                        className="form-select"
+                                        value={data.type}
+                                        onChange={(e) => setData('type', e.target.value)}
+                                        required
+                                    >
+
+                                        <option value="">Sélectionnez le type</option>
+                                        <option value="Généraliste">Généraliste</option>
+                                        <option value="Spécialiste">Spécialiste</option>
+                                    </select>
+                                    <InputError message={errors.type} className="mt-2" />
+                                </div>
+
 
                                 {/* Adresse */}
                                 <div className="mb-3">
@@ -169,6 +202,33 @@ const StMedecinProfileEdit = ({ medecin }) => {
                                     <InputError message={errors.email} className="mt-2" />
                                 </div>
 
+                                <div className="mb-3">
+                                    <InputLabel htmlFor="nombre_d_annee_experience" value="Nombre d'années d'expérience" />
+                                    <TextInput
+                                        id="nombre_d_annee_experience"
+                                        type="number"
+                                        name="nombre_d_annee_experience"
+                                        value={data.nombre_d_annee_experience}
+                                        onChange={(e) => setData('nombre_d_annee_experience', e.target.value)}
+                                        required
+                                        min="0"
+                                    />
+                                    <InputError message={errors.nombre_d_annee_experience} className="mt-2" />
+                                </div>
+                                <div className="mb-3">
+                                    <InputLabel htmlFor="a_propos" value="À propos (description professionnelle)" />
+                                    <textarea
+                                        id="a_propos"
+                                        name="a_propos"
+                                        className="form-control"
+                                        value={data.a_propos}
+                                        onChange={(e) => setData('a_propos', e.target.value)}
+                                        rows="4"
+                                        required
+                                    />
+                                    <InputError message={errors.a_propos} className="mt-2" />
+                                </div>
+
                                 {/* Lien de la carte */}
                                 <div className="mb-3">
                                     <InputLabel htmlFor="carte" value="Lien de la carte (facultatif)" />
@@ -194,6 +254,46 @@ const StMedecinProfileEdit = ({ medecin }) => {
                 </div>
             </div>
             <PharmacieFooter />
+
+            {/* Modal succès */}
+            <div
+                className="modal fade"
+                id="successModal"
+                tabIndex="-1"
+                aria-labelledby="successModalLabel"
+                aria-hidden="true"
+            >
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content border-success shadow-sm">
+                        <div className="modal-header bg-success text-white">
+                            <h5 className="modal-title d-flex align-items-center" id="successModalLabel">
+                                <i className="bi bi-person-check-fill me-2" style={{ fontSize: '1.5rem' }}></i>
+                                Profil mis à jour avec succès !
+                            </h5>
+                            <button
+                                type="button"
+                                className="btn-close btn-close-white"
+                                data-bs-dismiss="modal"
+                                aria-label="Fermer"
+                            ></button>
+                        </div>
+                        <div className="modal-body fs-5 text-center text-success">
+                            Votre profil a été mis à jour avec succès.<br />
+                            Merci de garder vos informations à jour pour profiter pleinement de nos services.
+                        </div>
+                        <div className="modal-footer justify-content-center">
+                            <button
+                                type="button"
+                                className="btn btn-success px-4"
+                                data-bs-dismiss="modal"
+                            >
+                                Fermer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </>
     );
 };

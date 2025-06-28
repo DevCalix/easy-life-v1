@@ -4,6 +4,7 @@ import { useForm, usePage } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import InputError from '@/Components/InputError';
 import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const AddVariationForm = ({ produitId, variations }) => {
     const { props } = usePage(); // Accéder aux props transmises par Laravel
@@ -73,16 +74,18 @@ const AddVariationForm = ({ produitId, variations }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar/>
-            <div className="container my-4">
+        <AdminLayout>
+            {/* <DashboardNavbar/> */}
+            <div className="container my-1">
                 <div className="row">
                     {/* Formulaire d'ajout de variation */}
                     <div className="col-md-6 mb-4">
                         <div className="card shadow-sm">
                             <div className="card-header bg-primary text-white text-center">
                                 Ajouter une variation
+                                
                             </div>
+                            <hr className="border-warning border-2 opacity-75"/>
                             <div className="card-body">
                                 {flash.success && (
                                     <div className="alert alert-success">{flash.success}</div>
@@ -293,7 +296,7 @@ const AddVariationForm = ({ produitId, variations }) => {
                     </div>
                 </div>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

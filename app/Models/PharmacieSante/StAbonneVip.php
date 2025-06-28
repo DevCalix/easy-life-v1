@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class StAbonneVip extends Model
 {
-    protected $fillable = ['user_id', 'expire_at'];
+    protected $fillable = ['user_id', 'expire_at','type_abonnement', 'rdv_restants'];
 
     // Définir la relation avec le modèle User
     public function user(): BelongsTo

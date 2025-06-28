@@ -1,16 +1,14 @@
 import React from "react";
 import { Head, Link, usePage } from "@inertiajs/react";
-import DashboardNavbar from "@/Layouts/Supermarche/admin/DashboardNavbar";
-import PharmacieFooter from "@/Layouts/PharmacieSante/PharmacieFooter";
+import AdminLayout from "@/Layouts/Admin/AdminLayout";
 
 export default function CommandesIndex() {
     const { commandes } = usePage().props;
 
     return (
-        <>
-            <Head title="Liste des Commandes" />
-            <DashboardNavbar />
-            <div className="container my-5">
+        <AdminLayout title="Liste des Commandes">
+
+            <div className="container my-2">
                 <h1 className="mb-4 montserrat-normal fw-bold">Liste des Commandes</h1>
                 <hr className="border border-warning border-3 opacity-75"/>
                 <div className="table-responsive">
@@ -68,7 +66,7 @@ export default function CommandesIndex() {
                     </nav>
                 </div>
             </div>
-            <PharmacieFooter/>
-        </>
+            
+        </AdminLayout>
     );
 }

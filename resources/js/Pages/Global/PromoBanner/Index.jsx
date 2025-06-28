@@ -1,7 +1,7 @@
 import React from "react";
 import { Head, Link, usePage, router } from "@inertiajs/react";
-import DashboardNavbar from "@/Layouts/Supermarche/admin/DashboardNavbar";
 import "../../../../css/global/adsBanner.css";
+import AdminLayout from "@/Layouts/Admin/AdminLayout";
 
 export default function Index({ banners = [] }) {
     const { props } = usePage(); // Accéder aux props transmises par Laravel
@@ -15,10 +15,9 @@ export default function Index({ banners = [] }) {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Gestion des bannières" />
-            <div className="container py-5">
+        <AdminLayout title="Gestion des bannières">
+
+            <div className="container py-2">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="montserrat-normal fw-bold">Gestion des bannières</h1>
                     <Link
@@ -74,6 +73,6 @@ export default function Index({ banners = [] }) {
                     ))}
                 </div>
             </div>
-        </>
+        </AdminLayout>
     );
 }

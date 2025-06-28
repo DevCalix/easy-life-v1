@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Head, useForm, Link, usePage } from '@inertiajs/react';
 import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const MetaCreate = ({ hotel }) => {
     const { data, setData, post, processing, errors } = useForm({
@@ -22,10 +23,8 @@ const MetaCreate = ({ hotel }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Gérer les informations supplémentaires" />
-            <div className="container py-5">
+        <AdminLayout title="Gérer les informations supplémentaires">
+            <div className="container-fluid py-3">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="montserrat-normal fw-bold">Informations supplémentaires</h1>
                     <Link href={route('hotels.index')} className="btn btn-primary montserrat-normal">
@@ -129,7 +128,7 @@ const MetaCreate = ({ hotel }) => {
                     </div>
                 )}
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

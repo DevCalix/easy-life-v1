@@ -7,8 +7,8 @@ import Textarea from '@/Components/Textarea';
 import SelectInput from '@/Components/SelectInput';
 import FileInput from '@/Components/FileInput';
 import PrimaryButton from '@/Components/PrimaryButton';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import SelectInputTom from '@/Components/SelectInputTom';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const CreateChambre = ({ hotels }) => {
     const { data, setData, post, processing, errors } = useForm({
@@ -70,8 +70,8 @@ const CreateChambre = ({ hotels }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
+        <AdminLayout title={"Gestion des Chambres"}>
+
             <Head title="Ajouter une Chambre" />
             <div className="container py-5">
                 <div className="d-flex justify-content-between align-items-center mb-4">
@@ -280,7 +280,7 @@ const CreateChambre = ({ hotels }) => {
                     </div>
                 </form>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

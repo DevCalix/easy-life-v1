@@ -24,12 +24,15 @@ class UpdateMedecinRequest extends FormRequest
         return [
             'nom' => 'required|string|max:255',
             'specialite' => 'required|string|max:255',
+            'type' => 'required|string|in:Généraliste,Spécialiste',
             'adresse' => 'required|string|max:255',
             'telephone' => 'required|string|max:20',
             'email' => 'required|email',
             'carte' => 'nullable|string',
             'image_principale' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'note' => 'nullable|numeric|min:0|max:5',
+            'nombre_d_annee_experience' => 'required|integer|min:0',
+            'a_propos' => 'required|string|max:1000',
         ];
     }
 
@@ -41,6 +44,8 @@ class UpdateMedecinRequest extends FormRequest
         return [
             'nom.required' => 'Le nom est obligatoire.',
             'specialite.required' => 'La spécialité est obligatoire.',
+            'type.required' => 'Le type de médecin est obligatoire.',
+            'type.in' => 'Le type de médecin doit être Généraliste ou Spécialiste.',
             'email.required' => "L'email est obligatoire.",
             'email.email' => "L'email n'est pas valide.",
             'image_principale.image' => "Le fichier doit être une image.",
@@ -49,6 +54,11 @@ class UpdateMedecinRequest extends FormRequest
             'note.numeric' => "La note doit être un nombre.",
             'note.min' => "La note ne peut pas être inférieure à 0.",
             'note.max' => "La note ne peut pas dépasser 5.",
+            'nombre_d_annee_experience.required' => "Le nombre d'années d'expérience est obligatoire.",
+            'nombre_d_annee_experience.integer' => "Le nombre d'années d'expérience doit être un nombre entier.",
+            'nombre_d_annee_experience.min' => "Le nombre d'années d'expérience ne peut pas être négatif.",
+            'a_propos.required' => "La description professionnelle est obligatoire.",
+            'a_propos.max' => "La description professionnelle ne peut pas dépasser 1000 caractères.",
         ];
     }
 }

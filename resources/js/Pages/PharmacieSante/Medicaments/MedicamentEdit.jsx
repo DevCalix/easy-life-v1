@@ -7,8 +7,8 @@ import Textarea from '@/Components/Textarea';
 import PrimaryButton from '@/Components/PrimaryButton';
 import SelectInput from '@/Components/SelectInput';
 import Checkbox from '@/Components/Checkbox';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import SelectInputTom from '@/Components/SelectInputTom';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const MedicamentEdit = ({ medicament, pharmacies, categories }) => {
     // Convertir les catégories associées en format attendu par SelectInputTom
@@ -38,10 +38,9 @@ const MedicamentEdit = ({ medicament, pharmacies, categories }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Modifier un Médicament" />
-            <div className="container py-5">
+        <AdminLayout title="Modifier un Médicament">
+
+            <div className="container py-2">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="montserrat-normal fw-bold">Modifier un Médicament</h1>
                     <Link href={route('medicaments.index')} className="btn btn-primary montserrat-normal">
@@ -165,7 +164,7 @@ const MedicamentEdit = ({ medicament, pharmacies, categories }) => {
                     </div>
                 </form>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

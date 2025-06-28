@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('st_abonne_vips', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade'); // Clé étrangère vers `users`
-            $table->timestamp('expire_at'); // Date d'expiration de l'abonnement
+            $table->timestamp('expire_at');
+            $table->string('type_abonnement')->default('generaliste');
+            $table->integer('rdv_restants')->default(2);
             $table->timestamps();
         });
     }

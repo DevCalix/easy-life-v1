@@ -6,8 +6,8 @@ import InputError from '@/Components/InputError';
 import Textarea from '@/Components/Textarea';
 import SelectInput from '@/Components/SelectInput';
 import PrimaryButton from '@/Components/PrimaryButton';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import SelectInputTom from '@/Components/SelectInputTom';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const EditChambre = ({ hotels, chambre }) => {
     const { data, setData, put, processing, errors } = useForm({
@@ -61,8 +61,7 @@ const EditChambre = ({ hotels, chambre }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
+        <AdminLayout title={"Modifier la Chambre"}>
             <Head title="Modifier une Chambre" />
             <div className="container py-5">
                 <div className="d-flex justify-content-between align-items-center mb-4">
@@ -240,7 +239,7 @@ const EditChambre = ({ hotels, chambre }) => {
                     </div>
                 </form>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

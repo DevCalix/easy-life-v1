@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const HopitalIndex = () => {
     const { hopitaux, flash } = usePage().props; // Récupérer les hopitaux depuis les props
@@ -33,9 +33,8 @@ const HopitalIndex = () => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <div className="container py-5">
+        <AdminLayout title="Liste des Hôpitaux">
+            <div className="container py-2">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="montserrat-normal fw-bold">Liste des hôpitaux</h1>
                     <Link href={route('hopitaux.create')} className="btn btn-primary montserrat-normal">
@@ -106,7 +105,7 @@ const HopitalIndex = () => {
                 draggable
                 pauseOnHover
             />
-        </>
+        </AdminLayout>
     );
 };
 

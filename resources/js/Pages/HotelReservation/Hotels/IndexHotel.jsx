@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const IndexHotel = () => {
     const { hotels, flash } = usePage().props;
@@ -40,10 +40,8 @@ const IndexHotel = () => {
     }, [search, hotels]);
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Liste des Hôtels" />
-            <div className="container py-5">
+        <AdminLayout title="Liste des Hôtels">
+            <div className="container py-2">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="montserrat-normal fw-bold">Liste des Hôtels</h1>
                     <Link href={route('hotels.create')} className="btn btn-primary montserrat-normal">
@@ -128,7 +126,7 @@ const IndexHotel = () => {
                 </div>
             </div>
             <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar />
-        </>
+        </AdminLayout>
     );
 };
 

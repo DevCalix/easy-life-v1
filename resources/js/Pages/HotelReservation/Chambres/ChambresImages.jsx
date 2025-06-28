@@ -2,6 +2,7 @@ import FileInput from "@/Components/FileInput";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
+import AdminLayout from "@/Layouts/Admin/AdminLayout";
 import DashboardNavbar from "@/Layouts/Supermarche/admin/DashboardNavbar";
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "@inertiajs/inertia-react";
@@ -87,10 +88,10 @@ const ChambreImages = ({ chambre }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
+        <AdminLayout title={"Gestion des Images de l'Hôtel"}>
+
             <Head title="Gestion des Images de l'Hôtel" />
-            <div className="container py-5">
+            <div className="container py-3">
                 <div className="d-flex justify-content-between align-items-center">
                     <h1 className="mb-4 montserrat-normal fw-bold">Gestion des Images</h1>
                     <button
@@ -104,7 +105,7 @@ const ChambreImages = ({ chambre }) => {
                 <hr className="border border-danger border-3 opacity-75"/>
 
                 {/* Image Principale */}
-                <div className="card shadow p-4 mb-4">
+                <div className="card shadow p-2 mb-4">
                     <div className="row">
                         <div className="col-md-6">
                             <h5 className="mb-4 montserrat-normal fw-bold">Image Principale</h5>
@@ -200,7 +201,7 @@ const ChambreImages = ({ chambre }) => {
                 draggable
                 pauseOnHover
             />
-        </>
+        </AdminLayout>
     );
 };
 

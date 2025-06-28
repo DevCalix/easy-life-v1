@@ -6,6 +6,7 @@ import InputError from '@/Components/InputError';
 import Checkbox from '@/Components/Checkbox';
 import PrimaryButton from '@/Components/PrimaryButton';
 import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const PharmacieEdit = ({ pharmacie }) => {
     const { data, setData, put, processing, errors } = useForm({
@@ -32,9 +33,8 @@ const PharmacieEdit = ({ pharmacie }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Modifier une Pharmacie" />
+        <AdminLayout title="Modifier une Pharmacie">
+            
             <div className="container py-5">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="mb-4 montserrat-normal fw-bold">Modifier la Pharmacie</h1>
@@ -98,7 +98,7 @@ const PharmacieEdit = ({ pharmacie }) => {
                     </div>
                 </form>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

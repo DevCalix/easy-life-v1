@@ -4,6 +4,7 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Textarea from "@/Components/Textarea";
 import TextInput from "@/Components/TextInput";
+import AdminLayout from "@/Layouts/Admin/AdminLayout";
 import DashboardNavbar from "@/Layouts/Supermarche/admin/DashboardNavbar";
 import { Inertia } from "@inertiajs/inertia";
 import { Head, useForm, usePage } from "@inertiajs/react";
@@ -172,13 +173,14 @@ const handleImageSubmit = (e) => {
 };
 
     return (
-        <>
+        <AdminLayout>
             <Head title="Gestion de categorie"/>
-            <DashboardNavbar/>
-            <div className="container py-5">
-                <h1 className="mb-4">
+            {/* <DashboardNavbar/> */}
+            <div className="container py-1">
+                <h1 className="mb-4 montserrat-normal fw-bold text-primary">
                     {editingCategory ? 'Modifier une Catégorie' : 'Ajouter une Catégorie'}
                 </h1>
+                <hr className="border-warning border-2 opacity-75"/>
 
                 {/* Formulaire d'ajout (nom, description, image) */}
                 {!editingCategory && (
@@ -370,7 +372,7 @@ const handleImageSubmit = (e) => {
                     pauseOnHover
                 />
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

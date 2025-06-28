@@ -6,8 +6,8 @@ import SelectInput from '@/Components/SelectInput';
 import FileInput from '@/Components/FileInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
 import { Head, useForm } from '@inertiajs/react';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const CreateRestaurant = () => {
     const { data, setData, post, processing, errors } = useForm({
@@ -36,13 +36,11 @@ const CreateRestaurant = () => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Ajouter un Restaurant" />
-            <div className="container py-5">
+        <AdminLayout title="Ajouter un Restaurant">
+            <div className="container py-2">
                 <div className="card shadow-sm">
                     <div className="card-header bg-primary text-white">
-                        <h4 className="mb-0">Ajouter un Restaurant</h4>
+                        <h4 className="mb-0 montserrat-normal fw-bold">Ajouter un Restaurant</h4>
                     </div>
                     <div className="card-body">
                         <form onSubmit={handleSubmit}>
@@ -176,7 +174,7 @@ const CreateRestaurant = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

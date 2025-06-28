@@ -10,8 +10,8 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import axios from 'axios';
 import SelectInputTom from '@/Components/SelectInputTom';
 import Checkbox from '@/Components/Checkbox';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
-import PiedDePageResto from '@/Layouts/Restaurant/global/PiedDePageResto';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
+
 
 const EditRepas = ({ repas, categories, restaurants, tags: initialTags }) => {
     // Gestion du formulaire pour les données du repas
@@ -128,11 +128,9 @@ const EditRepas = ({ repas, categories, restaurants, tags: initialTags }) => {
     };
 
     return (
-        <>
-            <Head title="Modifier un Repas" />
-            <DashboardNavbar/>
-            <div className="container py-5">
-                <h1 className="mb-4">Modifier un Repas</h1>
+        <AdminLayout title="Modifier un Repas">
+            <div className="container py-2">
+                <h1 className="mb-4 montserrat-normal fw-bold">Modifier un Repas</h1>
 
                 {/* Section 1 : Formulaire pour les données du repas */}
                 <div className="card mb-4">
@@ -354,8 +352,7 @@ const EditRepas = ({ repas, categories, restaurants, tags: initialTags }) => {
                 </div>
 
             </div>
-            <PiedDePageResto/>
-        </>
+        </AdminLayout>
     );
 };
 

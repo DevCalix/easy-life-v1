@@ -60,7 +60,7 @@ const CategoriesCreate = () => {
     // Fonction pour charger les catégories depuis l'API
     const fetchCategories = async () => {
         try {
-            const response = await axios.get('/supermarche/managers/categories');
+            const response = await axios.get('/supermarche/managers/mds-categories');
             setCategories(response.data);
         } catch (error) {
             console.error('Erreur lors du chargement des catégories :', error);
@@ -101,7 +101,7 @@ const CategoriesCreate = () => {
     // Gestion de la mise à jour d'une catégorie (nom et description)
     const handleUpdateCategory = (e) => {
         e.preventDefault();
-        Inertia.put(`/supermarche/managers/categories/${editingCategory.id}`, data, {
+        Inertia.put(`/supermarche/managers/mds-categories/${editingCategory.id}`, data, {
             onSuccess: () => {
                 reset();
                 setEditingCategory(null);
@@ -116,7 +116,7 @@ const CategoriesCreate = () => {
     // Gestion de la suppression d'une catégorie
     const handleDeleteCategory = (id) => {
         if (window.confirm("Êtes-vous sûr de vouloir supprimer cette catégorie ?")) {
-            Inertia.delete(`/supermarche/managers/categories/${id}`, {
+            Inertia.delete(`/supermarche/managers/mds-categories/${id}`, {
                 onSuccess: () => {
                     toast.success('Catégorie supprimée avec succès !', {
                         position: "bottom-right",
@@ -174,7 +174,7 @@ const handleImageSubmit = (e) => {
 
     return (
         <SupermarketLayout title="Gestion des Catégories">
-            
+
             <div className="container py-5">
                 <h1 className="mb-4 h5 fw-bold">
                     {editingCategory ? 'Modifier une Catégorie' : 'Ajouter une Catégorie'}

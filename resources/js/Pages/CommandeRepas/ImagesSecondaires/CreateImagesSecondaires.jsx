@@ -2,8 +2,7 @@ import FileInput from "@/Components/FileInput";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
-import PiedDePageResto from "@/Layouts/Restaurant/global/PiedDePageResto";
-import DashboardNavbar from "@/Layouts/Supermarche/admin/DashboardNavbar";
+import AdminLayout from "@/Layouts/Admin/AdminLayout";
 import { useForm, router, Link, Head } from "@inertiajs/react";
 import { useState } from "react";
 
@@ -60,12 +59,11 @@ const CreateImagesSecondaires = ({ repas, imagesSecondaires = [] }) => {
     };
 
     return (
-        <>
-            <Head title="Image secondaire"/>
-            <DashboardNavbar/>
+        <AdminLayout title="Image secondaire">
+            
             <div className="container-fluid">
                 {/* Bouton de retour */}
-                <div className="my-4">
+                <div className="my-2">
                     <Link href={route('repas.index')} className="btn btn-secondary">
                         Retour
                     </Link>
@@ -144,8 +142,7 @@ const CreateImagesSecondaires = ({ repas, imagesSecondaires = [] }) => {
                     </div>
                 </div>
             </div>
-            <PiedDePageResto/>
-        </>
+        </AdminLayout>
     );
 };
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { Head, Link, useForm } from "@inertiajs/react";
-import DashboardNavbar from "@/Layouts/Supermarche/admin/DashboardNavbar";
-import PharmacieFooter from "@/Layouts/PharmacieSante/PharmacieFooter";
+import AdminLayout from "@/Layouts/Admin/AdminLayout";
 
 export default function AfficherCommande({ commande }) {
     const { data, setData, post, processing } = useForm({
@@ -17,10 +16,8 @@ export default function AfficherCommande({ commande }) {
     };
 
     return (
-        <>
-            <Head title={`Détails de la Commande #${commande.id}`} />
-            <DashboardNavbar />
-            <div className="container my-5">
+        <AdminLayout title={`Détails de la Commande #${commande.id}`}>
+            <div className="container my-2">
                 <h1 className="mb-4 montserrat-normal fw-bold">Détails de la Commande #{commande.id}</h1>
 
                 <div className="card shadow-sm">
@@ -99,7 +96,6 @@ export default function AfficherCommande({ commande }) {
                     </Link>
                 </div>
             </div>
-            <PharmacieFooter />
-        </>
+        </AdminLayout>
     );
 }

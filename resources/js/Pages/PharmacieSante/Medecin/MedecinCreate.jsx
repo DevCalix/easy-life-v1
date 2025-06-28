@@ -5,7 +5,6 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import PharmacieFooter from "@/Layouts/PharmacieSante/PharmacieFooter";
 import PharmaNavbar from "@/Layouts/PharmacieSante/PharmaNavbar";
-import DashboardNavbar from "@/Layouts/Supermarche/admin/DashboardNavbar";
 import { useForm } from "@inertiajs/inertia-react";
 import { Head, Link, router } from "@inertiajs/react";
 import { useState } from "react";
@@ -14,11 +13,14 @@ const MedecinCreate = () => {
     const { data, setData, post, processing, errors } = useForm({
         nom: '',
         specialite: '',
+        type: '',
         adresse: '',
         telephone: '',
         email: '',
         carte: '',
         image_principale: null,
+        nombre_d_annee_experience: '',
+        a_propos: '',
     });
 
     const [imagePreview, setImagePreview] = useState(null);
@@ -107,6 +109,24 @@ const MedecinCreate = () => {
                                     />
                                     <InputError message={errors.specialite} className="mt-2" />
                                 </div>
+                                {/* Type */}
+                                <div className="mb-3">
+                                    <InputLabel htmlFor="type" value="Type de médecin" />
+                                    <select
+                                        id="type"
+                                        name="type"
+                                        className="form-select"
+                                        value={data.type}
+                                        onChange={(e) => setData('type', e.target.value)}
+                                        required
+                                    >
+                                        <option value="">Sélectionnez le type</option>
+                                        <option value="Généraliste">Généraliste</option>
+                                        <option value="Spécialiste">Spécialiste</option>
+                                    </select>
+                                    <InputError message={errors.type} className="mt-2" />
+                                </div>
+
 
                                 {/* Adresse */}
                                 <div className="mb-3">
@@ -148,6 +168,32 @@ const MedecinCreate = () => {
                                         required
                                     />
                                     <InputError message={errors.email} className="mt-2" />
+                                </div>
+                                <div className="mb-3">
+                                    <InputLabel htmlFor="nombre_d_annee_experience" value="Nombre d'années d'expérience" />
+                                    <TextInput
+                                        id="nombre_d_annee_experience"
+                                        type="number"
+                                        name="nombre_d_annee_experience"
+                                        value={data.nombre_d_annee_experience}
+                                        onChange={(e) => setData('nombre_d_annee_experience', e.target.value)}
+                                        required
+                                        min="0"
+                                    />
+                                    <InputError message={errors.nombre_d_annee_experience} className="mt-2" />
+                                </div>
+                                <div className="mb-3">
+                                    <InputLabel htmlFor="a_propos" value="À propos (description professionnelle)" />
+                                    <textarea
+                                        id="a_propos"
+                                        name="a_propos"
+                                        className="form-control"
+                                        value={data.a_propos}
+                                        onChange={(e) => setData('a_propos', e.target.value)}
+                                        rows="4"
+                                        required
+                                    />
+                                    <InputError message={errors.a_propos} className="mt-2" />
                                 </div>
 
                                 {/* Lien de la carte */}

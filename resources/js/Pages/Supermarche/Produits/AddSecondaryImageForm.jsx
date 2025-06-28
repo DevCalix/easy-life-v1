@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm, usePage } from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
 import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const AddSecondaryImagesForm = ({ produitId, imagesSecondaires = [] }) => {
     const { props } = usePage(); // Accéder aux props transmises par Laravel
@@ -79,11 +80,12 @@ const AddSecondaryImagesForm = ({ produitId, imagesSecondaires = [] }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar/>
+        <AdminLayout>
+            {/* <DashboardNavbar/> */}
             <div className="card shadow-sm mb-4">
                 <div className="card-header bg-primary text-white">
-                    <h5 className="mb-0">Gestion des images secondaires</h5>
+                    <h5 className="mb-0 montserrat-normal">Gestion des images secondaires</h5>
+                    <hr className="border-warning border-2 opacity-75"/>
                 </div>
                 <div className="card-body">
                     {/* Flash Messages */}
@@ -228,7 +230,7 @@ const AddSecondaryImagesForm = ({ produitId, imagesSecondaires = [] }) => {
                     </div>
                 )}
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

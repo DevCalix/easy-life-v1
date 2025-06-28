@@ -37,6 +37,7 @@ class HandleInertiaRequests extends Middleware
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error'),
+                'rdv_confirm' => fn () => $request->session()->get('rdv_confirm'),
                 'reservation_key' => $request->session()->get('reservation_key'),
                 'cle_reservation' => $request->session()->get('cle_reservation'),
             ],

@@ -1,57 +1,106 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Head, router } from "@inertiajs/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PharmaNavbar from "@/Layouts/PharmacieSante/PharmaNavbar";
 import PharmacieFooter from "@/Layouts/PharmacieSante/PharmacieFooter";
+import axios from "axios";
 
 export default function AbonnementVip() {
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [customerName, setCustomerName] = useState("");
-    const [customerEmail, setCustomerEmail] = useState("");
+
+        useEffect(() => {
+    // Supprimer les backdrop Bootstrap restés actifs
+    const backdrops = document.querySelectorAll('.modal-backdrop');
+    backdrops.forEach((backdrop) => backdrop.remove());
+    // S’assurer que le body n’a plus la classe modal-open
+    document.body.classList.remove('modal-open');
+    }, []);
+
+    // Configuration des abonnements
+    const ABONNEMENTS = {
+        generaliste: {
+            prix: 3500,
+            label: "Généraliste",
+            description: "Accès aux médecins généralistes",
+            avantages: [
+                "2 Consultations par mois",
+                "10% sur nos pharmacies partenaires",
+            ]
+        },
+        specialiste: {
+            prix: 7000,
+            label: "Spécialiste",
+            description: "Accès aux médecins spécialistes",
+            avantages: [
+                "2 Consultations par mois",
+                "15% sur nos pharmacies partenaires"
+            ]
+        }
+    };
+
+    const [formData, setFormData] = useState({
+        phoneNumber: "",
+        customerName: "",
+        customerEmail: "",
+        typeAbonnement: "generaliste"
+    });
+
     const [loading, setLoading] = useState(false);
+    const [testLoading, setTestLoading] = useState(false);
     const [error, setError] = useState(null);
     const [transactionRef, setTransactionRef] = useState(null);
     const [showUssdConfirmation, setShowUssdConfirmation] = useState(false);
     const [ussdCode, setUssdCode] = useState("");
 
-    // Fonction pour gérer la soumission du formulaire
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const validatePhoneNumber = (phone) => {
+        const regex = /^(77|65|66|67|68|69|62|78|76|70|75)[0-9]{7}$/;
+        return regex.test(phone);
+    };
+
+    const validateForm = () => {
+        if (!formData.phoneNumber || !formData.customerName || !formData.customerEmail) {
+            setError("Veuillez remplir tous les champs obligatoires.");
+            toast.error("Veuillez remplir tous les champs obligatoires.");
+            return false;
+        }
+
+        if (!validatePhoneNumber(formData.phoneNumber)) {
+            setError("Numéro de téléphone invalide. Utilisez un format 77xxxxxxx");
+            toast.error("Numéro de téléphone invalide");
+            return false;
+        }
+
+        return true;
+    };
+
     const handleSubmit = async () => {
+        if (!validateForm()) return;
+
         setLoading(true);
         setError(null);
 
-        // Validation des champs
-        if (!phoneNumber || !customerName || !customerEmail) {
-            setError("Veuillez remplir tous les champs obligatoires.");
-            toast.error("Veuillez remplir tous les champs obligatoires.", {
-                position: "bottom-right",
-                autoClose: 5000,
-            });
-            setLoading(false);
-            return;
-        }
-
         try {
-            // Données à envoyer à l'API de paiement
-            const data = {
-                transaction_amount: 1000, // Montant fixe de 1000 FCFA
+            const abonnement = ABONNEMENTS[formData.typeAbonnement];
+
+            const paymentData = {
+                transaction_amount: abonnement.prix,
                 transaction_currency: "XAF",
-                transaction_reason: "Abonnement VIP 30 jours",
-                app_transaction_ref: `VIP_${Date.now()}`, // Générer une référence unique
-                customer_phone_number: phoneNumber,
-                customer_name: customerName,
-                customer_email: customerEmail,
+                transaction_reason: `Abonnement VIP ${formData.typeAbonnement}`,
+                app_transaction_ref: `VIP_${Date.now()}`,
+                customer_phone_number: formData.phoneNumber,
+                customer_name: formData.customerName,
+                customer_email: formData.customerEmail
             };
 
-            // Appeler l'API de paiement
             const response = await axios.post(
                 "https://my-coolpay.com/api/23b12b2c-0274-4556-b1e8-39e21b9830b0/payin",
-                data,
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
+                paymentData,
+                { headers: { "Content-Type": "application/json" } }
             );
 
             const { status, transaction_ref, action, ussd } = response.data;
@@ -64,234 +113,240 @@ export default function AbonnementVip() {
                     setUssdCode(ussd);
 
                     toast.info(
-                        `Transaction en attente. Veuillez confirmer en composant ${ussd} sur votre téléphone.`,
-                        {
-                            position: "bottom-right",
-                            autoClose: 10000,
-                        }
+                        `Confirmez le paiement en composant ${ussd} sur votre téléphone`,
+                        { autoClose: 10000 }
                     );
 
-                    // Vérifier le statut de la transaction après 15 secondes
-                    setTimeout(() => checkTransactionStatus(transaction_ref), 15000);
-                } else {
-                    throw new Error("Statut de transaction inconnu.");
+                    setTimeout(() => verifyPayment(transaction_ref), 15000);
                 }
             } else {
-                throw new Error("Erreur lors de l'initialisation de la transaction.");
+                throw new Error("Échec de l'initialisation du paiement");
             }
         } catch (error) {
-            console.error("Erreur lors de la soumission :", error);
-            setError(error.message || "Une erreur est survenue lors de la soumission. Veuillez réessayer.");
-            toast.error(error.message || "Une erreur est survenue lors de la soumission. Veuillez réessayer.", {
-                position: "bottom-right",
-                autoClose: 5000,
-            });
+            console.error("Erreur paiement:", error);
+            setError(error.response?.data?.message || "Erreur lors du paiement");
+            toast.error(error.response?.data?.message || "Erreur lors du paiement");
         } finally {
             setLoading(false);
         }
     };
 
+    // Fonction de test bypassant le paiement
     const handleSubmitTest = async () => {
-        setLoading(true);
+        if (!validateForm()) return;
+
+        setTestLoading(true);
         setError(null);
 
-        // Validation des champs
-        if (!phoneNumber || !customerName || !customerEmail) {
-            setError("Veuillez remplir tous les champs obligatoires.");
-            toast.error("Veuillez remplir tous les champs obligatoires.", {
-                position: "bottom-right",
-                autoClose: 5000,
-            });
-            setLoading(false);
-            return;
-        }
-
         try {
-            // Simuler une transaction réussie
-            const transaction_ref = `TEST_${Date.now()}`;
+            // Génère une référence de test
+            const testRef = `TEST_${Date.now()}`;
 
-            toast.success("Paiement simulé avec succès !", {
-                position: "bottom-right",
-                autoClose: 3000,
-            });
+            toast.info("Mode test - bypass du paiement", { autoClose: 3000 });
 
-            // Appel direct à la fonction d'enregistrement
-            await enregistrerAbonnementVIP(transaction_ref);
+            // Appel direct à l'enregistrement
+            await saveSubscription(testRef);
         } catch (error) {
-            console.error("Erreur lors de la soumission :", error);
-            setError("Une erreur est survenue lors de la soumission.");
-            toast.error("Une erreur est survenue lors de la soumission.", {
-                position: "bottom-right",
-                autoClose: 5000,
-            });
+            console.error("Erreur test:", error);
+            setError("Erreur lors du test d'enregistrement");
+            toast.error("Erreur lors du test d'enregistrement");
         } finally {
-            setLoading(false);
+            setTestLoading(false);
         }
     };
 
-
-
-    // Fonction pour vérifier le statut de la transaction
-    // Fonction pour vérifier le statut de la transaction
-    const checkTransactionStatus = async (transaction_ref) => {
+    const verifyPayment = async (ref) => {
         try {
             const response = await axios.get(
-                `https://my-coolpay.com/api/23b12b2c-0274-4556-b1e8-39e21b9830b0/checkStatus/${transaction_ref}`
+                `https://my-coolpay.com/api/23b12b2c-0274-4556-b1e8-39e21b9830b0/checkStatus/${ref}`
             );
 
-            const { transaction_status } = response.data;
-
-            if (transaction_status === "SUCCESS") {
-                toast.success("Paiement confirmé avec succès !", {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                });
-
-                // Enregistrer la commande après un paiement réussi
-                await enregistrerAbonnementVIP(transaction_ref);
+            if (response.data.transaction_status === "SUCCESS") {
+                await saveSubscription(ref);
             } else {
-                // Réessayer après 10 secondes si la transaction n'est pas encore confirmée
-                setTimeout(() => checkTransactionStatus(transaction_ref), 10000);
+                setTimeout(() => verifyPayment(ref), 10000);
             }
         } catch (error) {
-            console.error("Erreur lors de la vérification du statut :", error);
-            toast.error("La transaction n'a pas été confirmée. Veuillez réessayer.", {
-                position: "bottom-right",
-                autoClose: 5000,
-            });
+            console.error("Erreur vérification:", error);
+            toast.error("Erreur lors de la vérification du paiement");
         }
     };
 
-    // Fonction pour enregistrer l'abonnement VIP
-    const enregistrerAbonnementVIP = async (transaction_ref) => {
+    const saveSubscription = async (ref) => {
         try {
             const abonnementData = {
-                transaction_ref: transaction_ref,
-                montant: 1000,
-                nom_client: customerName,
-                email_client: customerEmail,
-                telephone_client: phoneNumber,
+                transaction_ref: ref,
+                montant: ABONNEMENTS[formData.typeAbonnement].prix,
+                nom_client: formData.customerName,
+                email_client: formData.customerEmail,
+                telephone_client: formData.phoneNumber,
+                type_abonnement: formData.typeAbonnement
             };
 
-            await router.post("/pharmacie-sante/abonnement-vip/enregistrer", abonnementData, {
-                preserveState: false,
-                onSuccess: (page) => {
-                    console.log("Réponse Laravel :", page);
-                    toast.success("Abonnement VIP activé avec succès !", {
-                        position: "bottom-right",
-                        autoClose: 5000,
-                        onClose: () => {
-                            router.visit(route("accueil.pharmacie"));
-                        },
-                    });
-                },
-                onError: (errors) => {
-                    console.error("Erreurs retournées par Laravel :", errors);
-                    toast.error("Erreur lors de l'activation de l'abonnement VIP. Vérifiez les logs.", {
-                        position: "bottom-right",
-                        autoClose: 5000,
-                    });
-                },
-            });
+            await router.post(
+                "/pharmacie-sante/abonnement-vip/enregistrer",
+                abonnementData,
+                {
+                    onSuccess: () => {
+                        toast.success("Abonnement activé avec succès !");
+                        setTimeout(() => {
+                            router.visit(route("abonnement.confirmation"));
+                        }, 3000);
+
+                    },
+                    onError: (errors) => {
+                        toast.error("Erreur lors de l'enregistrement");
+                        console.error("Erreurs:", errors);
+                    }
+                }
+            );
         } catch (error) {
-            console.error("Erreur lors de l'enregistrement de l'abonnement VIP :", error);
-            toast.error("Erreur lors de l'enregistrement de l'abonnement VIP. Veuillez réessayer.", {
-                position: "bottom-right",
-                autoClose: 5000,
-            });
+            console.error("Erreur enregistrement:", error);
+            toast.error("Erreur technique lors de l'enregistrement");
         }
     };
-
 
     return (
         <>
             <Head title="Abonnement VIP" />
-            <ToastContainer />
+            <ToastContainer position="bottom-right" />
             <PharmaNavbar />
 
-            <div className="container py-5">
-                <h1 className="text-center mb-2 fw-bold montserrat-normal">Abonnement VIP</h1>
-                <p className="text-center mb-4 text-muted">
-                    Profitez d'avantages exclusifs en devenant abonné VIP pour seulement 1000 FCFA.
-                </p>
-
-                <div className="card shadow-sm p-4">
-                    {/* Détails de l'abonnement */}
-                    <div className="mb-3 montserrat-normal">
-                        <h6 className="fw-bold">Avantages :</h6>
-                        <ul>
-                            <li>Accès à des médecins spécialistes</li>
-                            <li>Rendez-vous médicaux prioritaires</li>
-                            <li>Remises exclusives sur les médicaments</li>
-                        </ul>
-                        <h6 className="fw-bold">Durée :</h6>
-                        <p>30 jours</p>
-                        <h6 className="fw-bold">Prix :</h6>
-                        <h6 className="text-danger fw-bold">1000 XOF</h6>
-                    </div>
-
-                    {/* Formulaire de paiement */}
-                    <div className="mb-3">
-                        <label htmlFor="customerName" className="form-label fw-bold">
-                            Nom complet
-                        </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="customerName"
-                            placeholder="Entrer votre nom complet"
-                            value={customerName}
-                            onChange={(e) => setCustomerName(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="mb-3">
-                        <label htmlFor="phoneNumber" className="form-label fw-bold">
-                            Numéro de téléphone
-                        </label>
-                        <input
-                            type="tel"
-                            className="form-control"
-                            id="phoneNumber"
-                            placeholder="Entrer le numéro de téléphone"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="mb-3">
-                        <label htmlFor="customerEmail" className="form-label fw-bold">
-                            Adresse e-mail
-                        </label>
-                        <input
-                            type="email"
-                            className="form-control"
-                            id="customerEmail"
-                            placeholder="Entrer votre adresse e-mail"
-                            value={customerEmail}
-                            onChange={(e) => setCustomerEmail(e.target.value)}
-                        />
-                    </div>
-
-                    {error && <div className="alert alert-danger mt-3">{error}</div>}
-
-                    {showUssdConfirmation && (
-                        <div className="alert alert-info mt-3">
-                            Veuillez confirmer la transaction en composant <strong>{ussdCode}</strong> sur votre téléphone.
+            <div className="container py-2">
+                <div className="row justify-content-center">
+                    <div className="col-lg-8">
+                        <div className="text-center mb-2">
+                            <h1 className="fw-bold text-primary">Abonnement VIP</h1>
+                            <p className="lead">Accédez à des services médicaux premium</p>
+                            <hr className="border-2 border-primary opacity-75 mb-4" />
                         </div>
-                    )}
 
-                    <button
-                        className="btn btn-primary w-100 py-2 mt-3"
-                        onClick={handleSubmit}
-                        disabled={loading}
-                    >
-                        {loading ? (
-                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        ) : (
-                            "Payer maintenant"
-                        )}
-                    </button>
+                        <div className="card shadow-sm border-0 overflow-hidden">
+                            <div className="card-body p-2">
+                                <h4 className="fw-bold mb-4">Choisissez votre abonnement</h4>
+
+                                <div className="row g-3 mb-4">
+                                    {Object.entries(ABONNEMENTS).map(([key, abonnement]) => (
+                                        <div key={key} className="col-md-6">
+                                            <div
+                                                className={`card h-100 cursor-pointer ${formData.typeAbonnement === key ? 'border-primary border-2' : 'border-light'}`}
+                                                onClick={() => setFormData({...formData, typeAbonnement: key})}
+                                            >
+                                                <div className="card-body">
+                                                    <div className="d-flex justify-content-between">
+                                                        <h5 className={`fw-bold ${formData.typeAbonnement === key ? 'text-primary' : ''}`}>
+                                                            {abonnement.label}
+                                                        </h5>
+                                                        {formData.typeAbonnement === key && (
+                                                            <span className="badge bg-primary">Sélectionné</span>
+                                                        )}
+                                                    </div>
+                                                    <h3 className={`my-3 ${formData.typeAbonnement === key ? 'text-primary' : ''}`}>
+                                                        {abonnement.prix.toLocaleString()} FCFA
+                                                    </h3>
+                                                    <p className="text-muted small mb-3">{abonnement.description}</p>
+                                                    <ul className="ps-3">
+                                                        {abonnement.avantages.map((item, i) => (
+                                                            <li key={i} className="mb-1 small">{item}</li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <h4 className="fw-bold mb-4">Informations personnelles</h4>
+
+                                <div className="row g-3">
+                                    <div className="col-md-6">
+                                        <label className="form-label">Nom complet</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="customerName"
+                                            value={formData.customerName}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="col-md-6">
+                                        <label className="form-label">Email</label>
+                                        <input
+                                            type="email"
+                                            className="form-control"
+                                            name="customerEmail"
+                                            value={formData.customerEmail}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="col-md-6">
+                                        <label className="form-label">Téléphone</label>
+                                        <input
+                                            type="tel"
+                                            className="form-control"
+                                            name="phoneNumber"
+                                            value={formData.phoneNumber}
+                                            onChange={handleChange}
+                                            placeholder="77xxxxxxx"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="col-md-6">
+                                        <label className="form-label">Type d'abonnement</label>
+                                        <input
+                                            type="text"
+                                            className="form-control bg-light"
+                                            value={ABONNEMENTS[formData.typeAbonnement].label}
+                                            readOnly
+                                        />
+                                    </div>
+                                </div>
+
+                                {error && <div className="alert alert-danger mt-4">{error}</div>}
+
+                                {showUssdConfirmation && (
+                                    <div className="alert alert-info mt-4">
+                                        <i className="bi bi-info-circle me-2"></i>
+                                        Composez <strong>{ussdCode}</strong> pour confirmer le paiement de {ABONNEMENTS[formData.typeAbonnement].prix.toLocaleString()} FCFA
+                                    </div>
+                                )}
+
+                                <div className="d-grid gap-3 mt-4">
+                                    <button
+                                        className="btn btn-primary w-100 py-3 fw-bold"
+                                        onClick={handleSubmit}
+                                        disabled={loading}
+                                    >
+                                        {loading ? (
+                                            <>
+                                                <span className="spinner-border spinner-border-sm me-2"></span>
+                                                Paiement en cours...
+                                            </>
+                                        ) : (
+                                            `Payer ${ABONNEMENTS[formData.typeAbonnement].prix.toLocaleString()} FCFA`
+                                        )}
+                                    </button>
+
+                                    {/* <button
+                                        className="btn btn-outline-secondary w-100 py-3"
+                                        onClick={handleSubmitTest}
+                                        disabled={testLoading}
+                                    >
+                                        {testLoading ? (
+                                            <>
+                                                <span className="spinner-border spinner-border-sm me-2"></span>
+                                                Test en cours...
+                                            </>
+                                        ) : (
+                                            "Tester l'enregistrement (sans paiement)"
+                                        )}
+                                    </button> */}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -6,7 +6,7 @@ import InputError from '@/Components/InputError';
 import Textarea from '@/Components/Textarea';
 import FileInput from '@/Components/FileInput';
 import PrimaryButton from '@/Components/PrimaryButton';
-import DashboardNavbar from '@/Layouts/Supermarche/admin/DashboardNavbar';
+import AdminLayout from '@/Layouts/Admin/AdminLayout';
 
 const CreateCategorie = ({ categories }) => {
     const { data, setData, post, processing, errors } = useForm({
@@ -51,10 +51,8 @@ const CreateCategorie = ({ categories }) => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
-            <Head title="Ajouter une Catégorie" />
-            <div className="container py-5">
+        <AdminLayout title="Ajouter une Catégorie">
+            <div className="container py-2">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="montserrat-normal fw-bold">Ajouter une Catégorie</h1>
 
@@ -144,7 +142,7 @@ const CreateCategorie = ({ categories }) => {
                     </div>
                 </div>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

@@ -4,7 +4,8 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Textarea from "@/Components/Textarea";
 import TextInput from "@/Components/TextInput";
-import DashboardNavbar from "@/Layouts/Supermarche/admin/DashboardNavbar";
+import AdminLayout from "@/Layouts/Admin/AdminLayout";
+// import DashboardNavbar from "@/Layouts/Supermarche/admin/DashboardNavbar";
 import { useForm } from "@inertiajs/react";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -62,12 +63,12 @@ const CreateStore = () => {
     };
 
     return (
-        <>
-            <DashboardNavbar />
+        <AdminLayout>
+            {/* <DashboardNavbar /> */}
             <div className="container py-5">
                 <div className="card shadow-sm">
                     <div className="card-header bg-primary text-white">
-                        <h3 className="mb-0">Ajouter un Store</h3>
+                        <h3 className="mb-0 montserrat-normal">Ajouter un Store</h3>
                     </div>
                     <div className="card-body">
                         <form onSubmit={handleSubmit}>
@@ -236,7 +237,7 @@ const CreateStore = () => {
                     pauseOnHover
                 />
             </div>
-        </>
+        </AdminLayout>
     );
 };
 
